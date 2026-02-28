@@ -1,0 +1,1049 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    /* Latar Belakang Utama Tetap */
+    --bg-color: #111318; /* Tetap gelap biru yang kalem dan elegan */
+
+    /* Latar Belakang Kedua - Gradasi menyesuaikan bg-color */
+    --second-bg-color: linear-gradient(135deg, #2b343f, #44505c); 
+    /* Gradasi dari warna gelap kebiruan ke abu kebiruan, tetap modern & kalem, cocok dengan --bg-color */
+
+    /* Warna Utama - Glow kalem yang harmonis dengan latar */
+    --main-color: #33cc99; /* Tetap dipertahankan karena kontrasnya bagus dengan latar gelap */
+
+    /* Warna Putih Bersih */
+    --white-color: #ddd6d6; /* Untuk teks/ikon agar tetap jelas di latar gelap */
+
+    /* Warna Non-Aktif */
+    --disable-color: rgba(255, 255, 255, 0.35); 
+    /* Sedikit dikurangi transparansinya agar lebih lembut di atas warna bg-color */
+}
+
+
+
+/* Glow effect pada teks */
+h1, h2, h3, .main-button {
+    text-shadow: 0 0 10px rgba(51, 204, 153, 0.8), 0 0 20px rgba(51, 204, 153, 0.6);
+}
+
+/* Glow effect pada tombol */
+button, .main-button {
+    box-shadow: 0 0 10px rgba(51, 204, 153, 0.8), 0 0 20px rgba(51, 204, 153, 0.6);
+    border: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    color: var(--white-color);
+    background:var(--bg-color) ;
+    min-height: 100vh;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+}
+
+header.active {
+    animation: show-header 1.5s linear forwards;
+    animation-delay: 1s;
+}
+
+@keyframes show-header {
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.logo {
+    font-size: 3rem;
+    color: var(--white-color);
+    font-weight: 700;
+}
+
+nav a {
+    font-size: 2rem;
+    color: var(--white-color);
+    font-weight: 500;
+    margin-left: 3.5rem;
+    position: relative; /* Pastikan elemen ini bisa mendapat posisi untuk animasi */
+    opacity: 0; /* Mulai dengan elemen tidak terlihat */
+    animation: show-nav-link 1.5s ease-out forwards; /* Aplikasikan animasi */
+}
+
+
+@keyframes show-nav-link {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px); /* Mulai dari bawah */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Bergerak ke posisi normal */
+    }
+}
+
+nav a:nth-child(1) {
+    animation-delay: 0.3s; /* Tunda sedikit per link */
+}
+
+nav a:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+nav a:nth-child(3) {
+    animation-delay: 0.7s;
+}
+
+nav a:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+nav a:nth-child(5) {
+    animation-delay: 1.1s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--main-color);
+}
+
+#menu-icon {
+    font-size: 4rem;
+    display: none;
+}
+
+.bars-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.bars-box .bar {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    animation: hide-bars .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes hide-bars {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.bars-box .active .bar {
+    animation: show-bars .5s ease-in-out both;
+    animation-delay: calc(1.s * var(--i));
+}
+
+@keyframes hide-bars {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.bars-box.active .bar {
+    animation: show-bars .5s ease-in-out both;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes show-bars {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+section {
+    position: absolute;
+    inset: 0; /* shortcut untuk top: 0; left: 0; right: 0; bottom: 0 */
+    padding: 10rem 9% 2rem;
+    visibility: hidden;
+    opacity: 0;
+    overflow-y: auto;  /* biar konten tetap bisa discroll jika lebih tinggi dari layar */
+    z-index: 1; /* pastikan tidak tertimpa */
+}
+
+section.active {
+    animation: show-content 1.8s linear forwards;
+    animation-delay: 1.3s;
+}
+
+@keyframes show-content {
+    100% {
+        visibility: visible;
+        opacity: 1;
+        overflow: auto;
+    }
+}
+.home {
+    display: flex; /* Menggunakan layout flex untuk elemen-elemen di dalamnya */
+    align-items: center; /* Menyelaraskan elemen secara vertikal di tengah */
+    gap: .5rem; /* Memberikan jarak antar elemen sebesar 0.5rem */
+}
+
+.home-detail h1 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem); /* Ukuran font judul utama, menyesuaikan lebar layar antara 3.5rem hingga 5.5rem */
+}
+
+@keyframes show-content {
+    100% {
+        visibility: visible; /* Elemen menjadi terlihat */
+        opacity: 1; /* Opasitas menjadi penuh (terlihat jelas) */
+        overflow: auto; /* Mengatur overflow agar bisa ditampilkan jika ada konten yang meluap */
+    }
+}
+
+.home {
+    display: flex; /* Layout flex untuk elemen-elemen di dalamnya */
+    align-items: center; /* Menyelaraskan elemen secara vertikal di tengah */
+    gap: 5rem; /* Memberikan jarak antar elemen sebesar 5rem */
+}
+
+.home-detail h1 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem); /* Ukuran font judul utama, menyesuaikan lebar layar antara 3.5rem hingga 5.5rem */
+}
+
+.home-detail h2 {
+    display: inline-block; /* Menampilkan elemen h2 sebagai inline-block */
+    font-size: 3.2rem; /* Ukuran font untuk h2 */
+    margin-top: -1rem; /* Memberikan margin negatif di atas h2 agar posisinya lebih naik */
+}
+
+.home-detail h2 span {
+    position: relative; /* Menentukan posisi relatif untuk elemen span */
+    display: inline-block; /* Menampilkan span sebagai inline-block */
+    color: transparent; /* Membuat warna teks menjadi transparan */
+    -webkit-text-stroke: .07rem var(--main-color); /* Memberikan stroke (garis tepi) pada teks dengan warna utama */
+    
+    animation: display-text 16s linear infinite; /* Menambahkan animasi untuk teks muncul dan hilang */
+    animation-delay: calc(-4s * var(--i)); /* Menunda animasi dengan interval tertentu */
+}
+
+@keyframes display-text {
+    25%, 100% {
+        display: none; /* Teks disembunyikan pada 25% dan 100% dari durasi animasi */
+    }
+}
+
+.home-detail h2 span::before {
+    content: attr(data-text); /* Mengambil teks yang ada di atribut data-text */
+    position: absolute; /* Posisi teks diatur secara absolut */
+    width: 0; /* Menyembunyikan teks pada awalnya */
+    border-right: .2rem solid var(--main-color); /* Memberikan border kanan dengan warna utama */
+    color: var(--main-color); /* Mengatur warna teks sesuai dengan warna utama */
+    white-space: nowrap; /* Tidak ada pemotongan kata */
+    overflow: hidden; /* Menghilangkan teks yang melebihi batas */
+    animation: fill-text 4s linear infinite; /* Animasi untuk mengisi teks secara perlahan */
+}
+
+@keyframes fill-text {
+    10%, 100% {
+        width: 0; /* Membuat lebar teks 0 pada awal dan akhir animasi */
+    }
+    
+    70%, 90% {
+        width: 100%; /* Membuat lebar teks penuh pada 70% dan 90% durasi animasi */
+    }
+}
+
+.home-detail p {
+    font-size: 1.6rem; /* Ukuran font untuk paragraf */
+    margin: 1rem 0 2.5rem; /* Memberikan margin atas dan bawah untuk paragraf */
+}
+
+.home-detail .btn-sci {
+    display: flex; /* Menampilkan tombol sosial media dengan layout flex */
+    align-items: center; /* Menyelaraskan tombol-tombol secara vertikal */
+}
+
+.btn {
+    display: inline-block; /* Tombol ditampilkan sebagai inline-block */
+    padding: 1rem 3rem; /* Memberikan padding di dalam tombol */
+    background: var(--main-color); /* Memberikan background dengan warna utama */
+    border: .2rem solid var(--main-color); /* Memberikan border dengan warna utama */
+    border-radius: 4rem; /* Memberikan border radius untuk membuat tombol berbentuk melengkung */
+    box-shadow: 0 0 1rem var(--main-color); /* Memberikan bayangan pada tombol dengan warna utama */
+    font-size: 1.6rem; /* Ukuran font pada tombol */
+    color: var(--bg-color); /* Mengatur warna teks pada tombol sesuai dengan warna background */
+    font-weight: 500; /* Menentukan ketebalan font */
+    transition: .5s; /* Memberikan transisi halus selama 0.5 detik */
+}
+
+.btn:hover {
+    background: transparent; /* Mengubah background menjadi transparan saat di-hover */
+    color: var(--main-color); /* Mengubah warna teks menjadi warna utama */
+    box-shadow: none; /* Menghilangkan bayangan saat di-hover */
+}
+
+.home-detail .btn-sci .sci {
+    margin-left: 2rem; /* Memberikan margin kiri pada elemen sosial media */
+}
+
+.home-detail .btn-sci .sci a {
+    display: inline-flex; /* Menampilkan ikon sosial media dengan layout inline-flex */
+    padding: .8rem; /* Memberikan padding pada ikon */
+    border: .2rem solid var(--main-color); /* Memberikan border dengan warna utama */
+    border-radius: 50%; /* Membuat border menjadi lingkaran */
+    font-size: 2rem; /* Ukuran font untuk ikon sosial media */
+    color: var(--main-color); /* Warna ikon sosial media sesuai dengan warna utama */
+    margin: 0 .8rem; /* Memberikan margin kiri dan kanan pada ikon */
+    transition: .5s; /* Menambahkan transisi halus pada ikon */
+}
+
+.home-detail .btn-sci .sci a:hover {
+    background: var(--main-color); /* Memberikan background dengan warna utama saat di-hover */
+    color: var(--bg-color); /* Mengubah warna ikon menjadi warna background saat di-hover */
+    box-shadow: 0 0 1rem var(--main-color); /* Memberikan bayangan pada ikon saat di-hover */
+}
+
+.home-img .img-box {
+    position: relative; /* Menentukan posisi relatif untuk gambar */
+    width: 32vw; /* Lebar gambar 32% dari lebar tampilan */
+    height: 32vw; /* Tinggi gambar 32% dari lebar tampilan */
+    border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
+    padding: .5rem; /* Memberikan padding pada gambar */
+    display: flex; /* Menggunakan layout flex untuk menata gambar */
+    justify-content: center; /* Menyelaraskan gambar di tengah secara horizontal */
+    align-items: center; /* Menyelaraskan gambar di tengah secara vertikal */
+    overflow: hidden; /* Menyembunyikan bagian gambar yang meluap */
+}
+
+.home-img .img-box::before,
+.home-img .img-box::after {
+    content: ''; /* Menambahkan konten kosong untuk border animasi */
+    position: absolute; /* Posisi border diatur absolut */
+    width: 50rem; /* Lebar border 50rem */
+    height: 50rem; /* Tinggi border 50rem */
+    background: conic-gradient(transparent, transparent, transparent, var(--main-color)); /* Membuat border dengan gradien berputar */
+    transform: rotate(0deg); /* Rotasi awal border */
+    animation: rotate-border 9s linear infinite; /* Animasi untuk border berputar terus-menerus */
+}
+
+.home-img .img-box::after { 
+    animation-delay: -5s; /* Menunda animasi border belakang */
+}
+
+@keyframes rotate-border {
+    100% {
+        transform: rotate(360deg); /* Membuat border berputar 360 derajat */
+    }
+}
+
+.home-img .img-box .img-item {
+    position: relative; /* Menentukan posisi relatif untuk item gambar */
+    width: 100%; /* Lebar gambar 100% dari lebar kontainer */
+    height: 100%; /* Tinggi gambar 100% dari tinggi kontainer */
+    background: var(--bg-color); /* Background gambar sesuai dengan warna background */
+    border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
+    border: .01rem solid var(--bg-color); /* Memberikan border tipis dengan warna background */
+    display: flex; /* Menggunakan layout flex */
+    justify-content: center; /* Menyelaraskan gambar di tengah secara horizontal */
+    z-index: 1; /* Menentukan urutan lapisan gambar */
+    overflow: hidden; /* Menyembunyikan bagian gambar yang meluap */
+}
+
+.home-img .img-box .img-item img {
+    position: absolute; /* Posisi gambar diatur absolut */
+    top: 3rem; /* Memberikan jarak 3rem dari atas kontainer */
+    display: block; /* Menampilkan gambar sebagai block */
+    width: 85%; /* Gambar mengambil 85% dari lebar kontainer */
+    object-fit: cover; /* Menyesuaikan gambar dengan kontainer tanpa merusak proporsi */
+    mix-blend-mode: lighten; /* Mencampur gambar dengan efek pencahayaan */
+}
+
+.heading {
+    font-size: 4.5rem; /* Ukuran font untuk heading */
+    text-align: center; /* Menyelaraskan teks di tengah */
+    margin-bottom: 2rem; /* Memberikan jarak bawah pada heading */
+}
+
+.heading span {
+    color: var(--main-color); /* Memberikan warna utama pada bagian span di dalam heading */
+}
+
+
+
+
+
+
+.services-container {
+    display: grid;  /* Menggunakan grid layout untuk menata elemen dalam container */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));  /* Membuat kolom responsif, ukuran minimum 30rem, dan kolom menyesuaikan lebar layar */
+    gap: 2rem;  /* Memberikan jarak antar elemen di dalam grid */
+}
+
+.services-container .services-box {
+    padding: 3rem 2.5rem;  /* Memberikan padding di dalam kotak layanan */
+    background: var(--second-bg-color);  /* Warna latar belakang kotak layanan, diambil dari variabel CSS */
+    border: .2rem solid var(--second-bg-color);  /* Memberikan border dengan warna yang sama dengan latar belakang */
+    border-radius: 1rem;  /* Memberikan sudut border yang melengkung */
+    transition: .5s;  /* Menambahkan efek transisi untuk perubahan properti CSS */
+}
+
+.services-container .services-box:hover {
+    border-color: var(--main-color);  /* Mengubah warna border saat hover */
+    transform: scale(1.02);  /* Memberikan efek pembesaran sedikit saat hover */
+}
+
+.services-box .icon {
+    display: flex;  /* Menggunakan flexbox untuk menata ikon */
+    justify-content: space-between;  /* Menyebar elemen di dalam flex container */
+    align-items: center;  /* Menyelaraskan elemen secara vertikal di tengah */
+}
+
+.services-box .icon i {
+    color: black;  /* Mengubah warna ikon menjadi hitam */
+    font-size: 4.5rem;  /* Mengatur ukuran font ikon */
+    transition: .5s;  /* Menambahkan transisi pada perubahan warna atau transformasi */
+}
+
+.services-box .icon:hover i {
+    color: black;  /* Pastikan warna ikon tetap hitam saat hover */
+}
+
+.services-box:hover .icon :not(a i) {
+    color: black;  /* Mengatur warna ikon yang bukan bagian dari tag <a> tetap hitam saat hover */
+}
+
+.services-box .icon a {
+    display: inline-flex;  /* Membuat elemen link <a> menggunakan flexbox inline */
+    background: var(--white-color);  /* Memberikan latar belakang putih pada link */
+    border-radius: 50%;  /* Membuat link berbentuk lingkaran */
+    padding: 1rem;  /* Memberikan padding di dalam link */
+    transition: .5s;  /* Menambahkan transisi saat hover */
+}
+
+.services-box:hover .icon a {
+    background: var(--main-color);  /* Mengubah latar belakang link menjadi warna utama saat hover */
+}
+
+.services-box .icon a i {
+    font-size: 3rem;  /* Mengatur ukuran font ikon di dalam link */
+    color: var(--bg-color);  /* Mengatur warna ikon berdasarkan variabel latar belakang */
+    transform: rotate(225deg);  /* Memberikan efek rotasi pada ikon */
+}
+
+.services-box .icon a:hover i {
+    transform: rotate(180deg);  /* Mengubah rotasi ikon saat hover */
+} 
+
+.service-box h3 {
+    font-size: 3rem;  /* Mengatur ukuran font judul layanan */
+    margin: 5rem 0 2rem;  /* Memberikan margin atas dan bawah pada judul */
+    transition: .5s;  /* Menambahkan transisi saat perubahan properti */
+}
+
+.service-box:hover h3 {
+    color: var(--main-color);  /* Mengubah warna teks judul menjadi warna utama saat hover */
+}
+
+.services-box p {
+    font-size: 1.6rem;  /* Mengatur ukuran font teks deskripsi layanan */
+}
+
+/* Mengganti warna teks */
+.services h3, .services p {
+    color: black;  /* Mengubah warna teks menjadi hitam */
+}
+
+ /* Mengganti warna ikon */
+.services .icon i {
+    color: black;  /* Mengubah warna ikon menjadi hitam */
+}
+
+ /* Mengganti warna ikon arrow (tanda panah) */
+.services .icon a i {
+    color: black;  /* Mengubah warna ikon panah menjadi hitam */
+} 
+
+
+
+
+
+
+.resume-container {
+    display: grid;  /* Menggunakan grid layout untuk menata elemen di dalam container */
+    grid-template-columns: 1fr 2fr;  /* Membuat dua kolom, kolom pertama lebar 1fr dan kolom kedua 2fr */
+    gap: 5rem;  /* Menambahkan jarak antar elemen di dalam grid */
+}
+
+.resume-box h2 {
+    font-size: 4.5rem;  /* Mengatur ukuran font untuk judul di dalam box resume */
+}
+
+.resume-box p {
+    font-size: 1.6rem;  /* Mengatur ukuran font untuk teks deskripsi di dalam box resume */
+}
+
+.resume-box .desc {
+    margin: 2rem 0 2.5rem;  /* Memberikan margin atas dan bawah pada deskripsi resume */
+}
+
+.resume-box .resume-btn {
+    width: 100%;  /* Tombol akan mengisi seluruh lebar elemen */
+    height: 5.3rem;  /* Menentukan tinggi tombol */
+    background: var(--second-bg-color);  /* Memberikan warna latar belakang untuk tombol */
+    border: .2rem solid var(--second-bg-color);  /* Border tombol dengan warna latar belakang */
+    font-size: 1.6rem;  /* Ukuran font pada tombol */
+    color: var(--white-color);  /* Mengatur warna teks tombol */
+    font-weight: 500;  /* Menetapkan ketebalan font */
+    margin-bottom: 2rem;  /* Memberikan margin bawah pada tombol */
+    border-radius: .8rem;  /* Membuat sudut tombol melengkung */
+    cursor: pointer;  /* Menampilkan kursor pointer saat hover pada tombol */
+}
+
+.resume-box .resume-btn.active {
+    border-color: var(--main-color);  /* Mengubah warna border tombol ketika tombol aktif */
+    color: var(--main-color);  /* Mengubah warna teks tombol ketika tombol aktif */
+}
+
+.resume-detail {
+    display: none;  /* Menyembunyikan elemen dengan class .resume-detail */
+}
+
+.resume-detail.active {
+    display: block;  /* Menampilkan elemen dengan class .resume-detail ketika aktif */
+}
+
+.resume-box .heading {
+    font-size: 3.5rem;  /* Mengatur ukuran font untuk heading di dalam box resume */
+    text-align: left;  /* Menyelaraskan teks ke kiri */
+}
+
+.resume-list {
+    display: grid;  /* Menggunakan grid layout untuk daftar resume */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));  /* Menyesuaikan kolom agar responsif */
+    gap: 2rem;  /* Memberikan jarak antar elemen di dalam grid */
+    height: 45rem;  /* Mengatur tinggi daftar resume */
+    overflow: auto;  /* Menambahkan scroll jika konten melampaui tinggi elemen */
+}
+
+.resume-list::-webkit-scrollbar {
+    width: .7rem;  /* Menentukan lebar scrollbar */
+}
+
+.resume-list::-webkit-scrollbar-thumb {
+    background: transparent;  /* Membuat scrollbar thumb transparan */
+    border-radius: 1rem;  /* Menambahkan border radius pada scrollbar thumb */
+}
+
+.resume-list:hover::-webkit-scrollbar-thumb {
+    background: var(--main-color);  /* Mengubah warna scrollbar thumb saat hover */
+}
+
+.resume-list .resume-item {
+    background: var(--second-bg-color);  /* Memberikan latar belakang untuk tiap item resume */
+    border-radius: .8rem;  /* Membuat sudut melengkung pada item resume */
+    padding: 3rem 2.5rem;  /* Menambahkan padding di dalam item resume */
+    height: calc((45rem - 2rem) / 2);  /* Mengatur tinggi item resume agar pas dalam grid */
+    display: flex;  /* Menggunakan flexbox untuk menata isi item resume */
+    flex-direction: column;  /* Mengatur item dalam kolom vertikal */
+    justify-content: center;  /* Menyelaraskan konten item secara vertikal */
+}
+
+.resume-item .year {
+    color: var(--main-color);  /* Mengubah warna tahun menjadi warna utama */
+}
+
+.resume-item h3 {
+    font-size: 2.2rem;  /* Mengatur ukuran font untuk judul pekerjaan atau pengalaman */
+}
+
+.resume-item .company {
+    position: relative;  /* Mengatur posisi relatif untuk elemen perusahaan */
+    margin-left: 2rem;  /* Memberikan jarak sebelah kiri pada elemen perusahaan */
+    margin-bottom: 2rem;  /* Memberikan jarak bawah pada elemen perusahaan */
+}
+
+.resume-item .company::before {
+    content: '';  /* Menambahkan konten kosong untuk pseudo-element */
+    position: absolute;  /* Menempatkan pseudo-element secara absolut di dalam elemen perusahaan */
+    top: 50%;  /* Menyelaraskan pseudo-element di tengah vertikal */
+    transform: translateY(-50%);  /* Menggeser pseudo-element agar tepat di tengah vertikal */
+    padding: .5rem;  /* Memberikan padding pada pseudo-element */
+    background: var(--main-color);  /* Memberikan warna latar belakang pada pseudo-element */
+    border-radius: 50%;  /* Membuat pseudo-element berbentuk lingkaran */
+    margin-left: -2rem;  /* Mengatur margin kiri pseudo-element */
+}
+
+.resume-detail.skills .resume-list {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));  /* Mengatur grid untuk bagian keterampilan agar responsif */
+    height: auto;  /* Membiarkan tinggi daftar keterampilan sesuai dengan konten */
+    overflow: visible;  /* Menghilangkan overflow */
+}
+
+.resume-detail.skills .resume-item {
+    position: relative;  /* Mengatur posisi relatif untuk item keterampilan */
+    align-items: center;  /* Menyelaraskan elemen di dalam item secara vertikal */
+    height: auto;  /* Mengatur tinggi item keterampilan sesuai dengan konten */
+}
+
+.resume-detail.skills .resume-item i {
+    font-size: 8.5rem;  /* Mengatur ukuran font untuk ikon keterampilan */
+    transition: .5s;  /* Menambahkan transisi untuk perubahan properti */
+}
+
+.resume-detail.skills .resume-item:hover i {
+    color: var(--main-color);  /* Mengubah warna ikon menjadi warna utama saat hover */
+}
+
+.resume-detail.skills .resume-item span {
+    position: absolute;  /* Menempatkan teks dalam posisi absolut di dalam item keterampilan */
+    top: -20%;  /* Menempatkan teks sedikit di atas item */
+    background: var(--white-color);  /* Memberikan latar belakang putih pada teks */
+    color: var(--bg-color);  /* Mengubah warna teks menjadi warna latar belakang */
+    font-size: 1.6rem;  /* Mengatur ukuran font teks */
+    padding: .5rem 1rem;  /* Memberikan padding pada teks */
+    border-radius: .6rem;  /* Membuat sudut teks melengkung */
+    pointer-events: none;  /* Menonaktifkan interaksi dengan teks */
+    opacity: 0;  /* Menyembunyikan teks */
+    transform: scale(.9);  /* Memberikan efek kecil pada teks */
+    transition: .2s;  /* Menambahkan transisi pada perubahan properti */
+}
+
+.resume-detail.skills .resume-item:hover span {
+    top: -25%;  /* Memindahkan teks sedikit lebih tinggi saat hover */
+    opacity: 1;  /* Menampilkan teks */
+    transform: scale(1);  /* Mengembalikan teks ke ukuran normal */
+}
+
+.resume-detail.about .resume-list {
+    height: auto;  /* Membiarkan tinggi daftar tentang sesuai dengan konten */
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));  /* Membuat grid responsif */
+}
+
+.resume-detail.about .resume-item {
+    height: auto;  /* Mengatur tinggi item tentang sesuai dengan konten */
+    padding: 0 0 .5rem;  /* Menambahkan padding di bawah item tentang */
+    background: transparent;  /* Membuat latar belakang transparan */
+}
+
+.resume-detail.about .resume-item p {
+    color: var(--main-color);  /* Mengubah warna teks paragraf menjadi warna utama */
+}
+
+.resume-detail.about .resume-item p span {
+    color: var(--white-color);  /* Mengubah warna teks span menjadi putih */
+    margin-left: 1rem;  /* Memberikan margin kiri pada span */
+    font-size: 1.8rem;  /* Mengatur ukuran font span */
+}
+
+/* Mengubah warna teks menjadi putih, tanpa mempengaruhi gradasi di atasnya */
+.resume .desc {
+    color: white !important;  /* Mengubah warna teks deskripsi menjadi putih tanpa mempengaruhi latar belakang */
+}
+
+/* Mengganti warna teks pada resume section */
+.resume h2, 
+.resume p,  
+.resume button {
+    color: black;  /* Mengubah warna teks pada heading, paragraf, dan tombol menjadi hitam */
+}
+
+/* Mengganti warna ikon pada resume section */
+.resume .resume-item i {
+    color: black;  /* Mengubah warna ikon menjadi hitam */
+}
+
+/* Mengganti warna teks pada tombol */
+.resume .resume-btn {
+    color: black;  /* Mengubah warna teks tombol menjadi hitam */
+}
+
+/* Mengganti warna ikon pada tombol jika diperlukan */
+.resume .resume-btn i {
+    color: black;  /* Mengubah warna ikon tombol menjadi hitam */
+}
+
+
+
+
+
+
+.portofolio-container {
+    display: grid;  /* Menggunakan grid layout untuk menata elemen-elemen di dalam container portfolio */
+    grid-template-columns: repeat(2, 1fr);  /* Membuat dua kolom dengan lebar yang sama */
+    gap: 3rem;  /* Memberikan jarak antara elemen-elemen di dalam grid */
+}
+
+.potofolio-detail {
+    display: none;  /* Menyembunyikan elemen dengan class .potofolio-detail */
+}
+
+.potofolio-detail.active {
+    display: block;  /* Menampilkan elemen dengan class .potofolio-detail saat aktif */
+}
+
+.portofolio-box .numb {
+    font-size: 8rem;  /* Mengatur ukuran font angka besar pada portfolio */
+    -webkit-text-stroke: .07rem var(--white-color);  /* Menambahkan stroke putih pada teks (khusus untuk webkit) */
+    color: transparent;  /* Membuat teks menjadi transparan agar hanya stroke yang terlihat */
+    line-height: 1;  /* Mengatur line-height teks menjadi 1 */
+}
+
+.portofolio-box h3 {
+    font-size: 3.5rem;  /* Mengatur ukuran font untuk judul di dalam portfolio box */
+    margin: .8rem 0 2rem;  /* Memberikan margin atas dan bawah pada judul */
+}
+
+.portofolio-box p {
+    font-size: 1.6rem;  /* Mengatur ukuran font untuk paragraf di dalam portfolio box */
+}
+
+.portofolio-box .tech {
+    margin: 2rem 0;  /* Memberikan margin atas dan bawah pada elemen .tech */
+    color: var(--main-color);  /* Mengatur warna teks menjadi warna utama */
+    border-bottom: .1rem solid var(--white-color);  /* Menambahkan garis bawah berwarna putih */
+    padding-bottom: 2rem;  /* Memberikan padding bawah pada elemen .tech */
+}
+
+.portofolio-box .live-github a {
+    position: relative;  /* Mengatur posisi relatif untuk elemen link */
+    display: inline-flex;  /* Menampilkan elemen inline-flex */
+    padding: 1.3rem;  /* Memberikan padding pada elemen link */
+    font-size: 3rem;  /* Mengatur ukuran font untuk ikon di dalam link */
+    color: var(--white-color);  /* Mengatur warna teks menjadi putih */
+    border-radius: 50%;  /* Membuat border link menjadi lingkaran */
+    background: var(--second-bg-color);  /* Memberikan latar belakang dengan warna kedua */
+    transition: .5s;  /* Menambahkan efek transisi pada perubahan properti */
+}
+
+.portofolio-box .live-github a:hover {
+    color: var(--main-color);  /* Mengubah warna teks saat hover menjadi warna utama */
+}
+
+.portofolio-box .live-github a:first-child {
+    margin-right: 1.5rem;  /* Memberikan margin kanan pada ikon pertama */
+}
+
+.portofolio-box .live-github a:first-child i {
+    transform: rotate(135deg);  /* Memutar ikon pertama 135 derajat */
+}
+
+.portofolio-box .live-github a span {
+    position: absolute;  /* Menempatkan elemen span secara absolut di dalam link */
+    top: -60%;  /* Menempatkan span di atas link */
+    left: 50%;  /* Menyelaraskan span di tengah secara horizontal */
+    transform: translate(-50%) scale(.9);  /* Menyelaraskan dan mengecilkan span */
+    font-size: 1.6rem;  /* Mengatur ukuran font untuk teks di dalam span */
+    white-space: nowrap;  /* Menghindari teks membungkus ke baris berikutnya */
+    padding: .5rem 1rem;  /* Memberikan padding pada span */
+    border-radius: .6rem;  /* Membuat sudut span menjadi melengkung */
+    pointer-events: none;  /* Menonaktifkan interaksi dengan elemen span */
+    background: var(--white-color);  /* Memberikan latar belakang putih pada span */
+    color: var(--bg-color);  /* Mengubah warna teks span menjadi warna latar belakang */
+    opacity: 0;  /* Menyembunyikan span */
+    transition: .2s;  /* Menambahkan efek transisi pada perubahan properti */
+}
+
+.portofolio-box .live-github a:hover span {
+    top: -70%;  /* Memindahkan span sedikit lebih tinggi saat hover */
+    opacity: 1;  /* Menampilkan span saat hover */
+    transform: translate(-50%) scale(1);  /* Membalikkan ukuran span ke ukuran normal */
+}
+
+.portofolio-box .portofolio-carousel {
+    width: 100%;  /* Mengatur lebar carousel menjadi 100% dari kontainer */
+    height: 45rem;  /* Menentukan tinggi carousel */
+    border-radius: 1rem;  /* Menambahkan border-radius untuk sudut melengkung */
+    overflow: hidden;  /* Menyembunyikan bagian gambar yang keluar dari kontainer */
+}
+
+.portofolio-carousel .img-slide {
+    display: flex;  /* Menggunakan flexbox untuk menata gambar-gambar dalam carousel */
+    gap: 0;  /* Menghilangkan jarak antar gambar */
+    transition: transform .5s ease;  /* Menambahkan efek transisi saat pergeseran gambar */
+    height: 100%;  /* Menjamin carousel memiliki tinggi yang penuh */
+}
+
+.portofolio-carousel .img-item {
+    flex: 0 0 100%;  /* Setiap gambar memiliki lebar 100% */
+    height: inherit;  /* Menjaga tinggi gambar sesuai dengan container */
+}
+
+.portofolio-carousel .img-item img {
+    display: block;  /* Menampilkan gambar sebagai block */
+    width: 100%;  /* Gambar mengisi lebar penuh kontainer */
+    height: 100%;  /* Gambar mengisi tinggi penuh kontainer */
+    object-fit: cover;  /* Memastikan gambar tidak terdistorsi dan tetap terpotong jika perlu */
+    border-radius: 1rem;  /* Membuat sudut gambar melengkung */
+}
+
+.portofolio-box .navigation {
+    text-align: right;  /* Menyelaraskan tombol navigasi ke kanan */
+    margin-top: 2rem;  /* Memberikan margin atas pada navigasi */
+}
+
+.portofolio-box .navigation button {
+    display: inline-flex;  /* Menampilkan tombol sebagai inline-flex */
+    padding: .4rem;  /* Memberikan padding pada tombol */
+    background: var(--second-bg-color);  /* Menambahkan latar belakang tombol */
+    border: .2rem solid var(--main-color);  /* Menambahkan border dengan warna utama */
+    border-radius: .6rem;  /* Membuat sudut tombol melengkung */
+    font-size: 4rem;  /* Mengatur ukuran font tombol */
+    color: var(--main-color);  /* Mengatur warna teks tombol */
+    cursor: pointer;  /* Menampilkan kursor pointer saat tombol dihover */
+    transition: all 0.3s ease;  /* Menambahkan efek transisi pada semua perubahan properti tombol */
+}
+
+.portofolio-box .navigation button.disabled {
+    opacity: 0.5;  /* Membuat tombol lebih transparan saat dinonaktifkan */
+    cursor: not-allowed;  /* Menunjukkan bahwa tombol tidak dapat diklik */
+    border-color: var(--second-bg-color);  /* Mengubah warna border tombol yang dinonaktifkan */
+    color: var(--disable-color);  /* Mengubah warna teks tombol yang dinonaktifkan */
+}
+
+.portofolio-box .navigation button:hover:not(.disabled) {
+    background-color: var(--main-color);  /* Mengubah latar belakang tombol menjadi warna utama saat hover */
+    color: var(--bg-color);  /* Mengubah warna teks tombol menjadi warna latar belakang saat hover */
+}
+
+.portofolio-box .navigation .arrow-right {
+    margin-left: 1.5rem;  /* Memberikan margin kiri pada tombol panah kanan */
+}
+
+
+
+
+
+
+.contact-container {
+    display: grid;  /* Menggunakan grid untuk menata elemen-elemen di dalam container contact */
+    grid-template-columns: 1fr 1.3fr;  /* Membuat dua kolom dengan kolom pertama lebih kecil */
+    gap: 3rem;  /* Menambahkan jarak antara elemen-elemen di dalam grid */
+}
+
+.contact-container .contact-box:first-child {
+    align-self: center;  /* Menyelaraskan elemen pertama secara vertikal di tengah */
+}
+
+.contact-box h2 {
+    font-size: 4.5rem;  /* Ukuran font untuk heading */
+}
+
+.contact-box p {
+    font-size: 1.6rem;  /* Ukuran font untuk paragraf di dalam contact box */
+}
+
+.contact-box .desc {
+    margin: 1.5rem 0 2.5rem;  /* Margin atas dan bawah untuk deskripsi */
+}
+
+.contact-box .contact-detail {
+    display: flex;  /* Menggunakan flexbox untuk menata detail kontak */
+    align-items: center;  /* Menyelaraskan elemen secara vertikal di tengah */
+    margin: 2.5rem 0;  /* Memberikan jarak atas dan bawah */
+}
+
+.contact-detail i {
+    display: inline-flex;  /* Menampilkan ikon dengan inline-flex */
+    background: var(--second-bg-color);  /* Latar belakang warna kedua */
+    color: var(--main-color);  /* Warna ikon menjadi warna utama */
+    font-size: 3rem;  /* Ukuran font untuk ikon */
+    padding: 1.2rem;  /* Padding di dalam ikon */
+    border-radius: .6rem;  /* Sudut ikon melengkung */
+    margin-right: 1.5rem;  /* Margin kanan untuk memberi jarak antara ikon dan teks */
+}
+
+.contact-detail .detail p:first-child {
+    color: var(--main-color);  /* Warna teks pertama di dalam detail menjadi warna utama */
+}
+
+.contact-box form {
+    background: var(--second-bg-color);  /* Latar belakang form */
+    padding: 2.5rem 3.5rem 3.5rem;  /* Padding di dalam form */
+    border-radius: 1rem;  /* Sudut form melengkung */
+    text-align: center;  /* Menyelaraskan teks di tengah */
+}
+
+.contact-box .heading {
+    font-size: 3.5rem;  /* Ukuran font untuk heading di dalam form */
+}
+
+.contact-box .field-box {
+    display: flex;  /* Menggunakan flexbox untuk menata field input */
+    flex-wrap: wrap;  /* Membuat elemen-elemen input menjadi wrap jika diperlukan */
+    gap: 1rem;  /* Jarak antar elemen input */
+}
+
+.contact-box .field-box input,
+.contact-box .field-box textarea {
+    padding: 1.5rem;  /* Padding dalam elemen input dan textarea */
+    background: var(--bg-color);  /* Latar belakang yang lebih gelap */
+    border: .15rem solid var(--bg-color);  /* Border dengan warna latar belakang */
+    border-radius: 0.5rem;  /* Sudut border lebih melengkung */
+    font-size: 1.2rem;  /* Ukuran font untuk input dan textarea */
+    color: var(--white-color);  /* Warna teks menjadi putih */
+    width: 100%;  /* Lebar input dan textarea 100% */
+    height: 45px;  /* Tinggi input disesuaikan */
+}
+
+.contact-box .field-box textarea {
+    height: 100px;  /* Tinggi textarea lebih besar */
+    resize: none;  /* Menonaktifkan resizing textarea */
+}
+
+.contact-box .btn {
+    margin-top: 2rem;  /* Memberikan jarak atas untuk tombol */
+    cursor: pointer;  /* Menampilkan kursor pointer saat tombol dihover */
+}
+
+/* Fokus pada input dan textarea */
+.contact-box .field-box input:focus,
+.contact-box .field-box textarea:focus {
+    border-color: var(--main-color);  /* Warna border menjadi warna utama saat fokus */
+}
+
+
+@media screen and (max-width: 992px) {
+    header {
+        padding: 2rem 4%;  /* Padding pada header untuk memberikan ruang lebih */
+    }
+
+    section {
+        padding: 10rem 4% 2rem;  /* Padding pada section, dengan ruang lebih besar di bagian atas untuk menyesuaikan layout */
+    }
+}
+
+
+@media screen and (max-width: 810px) {
+    .contact-box .field-box {
+        grid-template-columns: 1fr;  /* Mengubah kolom input form menjadi satu kolom */
+    }
+}
+
+/* */
+@media screen and (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        background: var(--bg-color);
+        border-top: .1rem solid rgba(0, 0, 0, 2);
+        box-shadow: 0 .5rem .1rem rgba(0, 0, 0, 2);
+        text-align: center;
+        display: none;
+    }
+
+    nav.active {
+        display: block;
+    }
+
+    nav a {
+        display: block;
+        margin: 4rem 0;
+    }
+
+    .home {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .home-img .img-box {
+        width: 35rem;
+        height: 35rem;
+    }
+
+    .resume-container,
+    .portofolio-container,
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-container {
+        gap: 3rem;
+    }
+
+    .portofolio-container .portofolio-box:first-child {
+        order: 1;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .home-img .img-box {
+            width: 30rem;
+            height: 30rem;
+        }
+
+        .contact-box .field-box {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .home-detail,
+    .resume-box h2,
+    .resume-box .heading,
+    .resume-box .desc,
+    .resume-detail.about .resume-item {
+        text-align: center;
+    }
+
+    .contact-box form {
+        padding: 2rem 3rem 3.5rem;
+    }
+
+    .contact-box h2 {
+        font-size: 3.5rem;
+    }
+}
+
+/* terbaru */
+.arrow-left.disabled,
+.arrow-right.disabled {
+    opacity: 0.3;
+    opacity: defult;
+    pointer-events: none;
+}
