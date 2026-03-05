@@ -402,10 +402,6 @@ section.active {
 }
 
 
-
-
-
-
 .services-container {
     display: grid;  /* Menggunakan grid layout untuk menata elemen dalam container */
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));  /* Membuat kolom responsif, ukuran minimum 30rem, dan kolom menyesuaikan lebar layar */
@@ -495,11 +491,6 @@ section.active {
 .services .icon a i {
     color: black;  /* Mengubah warna ikon panah menjadi hitam */
 } 
-
-
-
-
-
 
 .resume-container {
     display: grid;  /* Menggunakan grid layout untuk menata elemen di dalam container */
@@ -695,11 +686,6 @@ section.active {
     color: black;  /* Mengubah warna ikon tombol menjadi hitam */
 }
 
-
-
-
-
-
 .portofolio-container {
     display: grid;  /* Menggunakan grid layout untuk menata elemen-elemen di dalam container portfolio */
     grid-template-columns: repeat(2, 1fr);  /* Membuat dua kolom dengan lebar yang sama */
@@ -841,11 +827,6 @@ section.active {
 .portofolio-box .navigation .arrow-right {
     margin-left: 1.5rem;  /* Memberikan margin kiri pada tombol panah kanan */
 }
-
-
-
-
-
 
 .contact-container {
     display: grid;  /* Menggunakan grid untuk menata elemen-elemen di dalam container contact */
@@ -1044,6 +1025,10 @@ section.active {
 .arrow-left.disabled,
 .arrow-right.disabled {
     opacity: 0.3;
-    opacity: defult;
     pointer-events: none;
+}
+
+.disabled{
+pointer-events:none;
+opacity:0.5;
 }
