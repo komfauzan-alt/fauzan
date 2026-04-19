@@ -3,7 +3,6 @@ const logoLink = document.querySelector('.logo');
 const sections = document.querySelectorAll('section');
 const menuIcon = document.querySelector('#menu-icon');
 const navbar = document.querySelector('header nav');
-const portfolioDetails = document.querySelectorAll('.potofolio-detail');
 
 // Tombol dan bagian resume
 const resumeBtns = document.querySelectorAll('.resume-btn');
@@ -45,14 +44,14 @@ const activePage = () => {
     header.classList.remove('active');
     setTimeout(() => {
         header.classList.add('active');
-    }, 1100);
+    }, 150);
 
     navLinks.forEach(link => link.classList.remove('active'));
 
     barsBox.classList.remove('active');
     setTimeout(() => {
         barsBox.classList.add('active');
-    }, 1100);
+    }, 150);
 
     sections.forEach(section => section.classList.remove('active'));
 
@@ -69,7 +68,7 @@ navLinks.forEach((link, idx) => {
 
             setTimeout(() => {
                 sections[idx].classList.add('active');
-            }, 1100);
+            }, 150);
         }
     });
 });
@@ -82,7 +81,7 @@ logoLink.addEventListener('click', () => {
 
         setTimeout(() => {
             sections[0].classList.add('active');
-        }, 1100);
+        }, 150);
     }
 });
 
@@ -92,17 +91,21 @@ const carousel = document.querySelector('.img-slide');
 const images = document.querySelectorAll('.img-item');
 const leftArrow = document.querySelector('.arrow-left');
 const rightArrow = document.querySelector('.arrow-right');
-const portfolioDetailsList = document.querySelectorAll('.potofolio-detail');
+const portfolioDetailsList = document.querySelectorAll('.portfolio-detail');
+
+// Pastikan carousel tidak berjalan melewati jumlah detail (nomor) yang tersedia
+const maxIndex = Math.min(images.length, portfolioDetailsList.length) - 1;
 
 function updateCarousel() {
-    const totalImages = images.length;
+    // Pastikan currentIndex berada di dalam batas yang benar
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
 
     // Geser carousel
     carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
     // Toggle tombol disabled
     leftArrow.classList.toggle('disabled', currentIndex === 0);
-    rightArrow.classList.toggle('disabled', currentIndex === totalImages - 1);
+    rightArrow.classList.toggle('disabled', currentIndex === maxIndex);
 
     // Update detail portfolio
     updatePortfolioDetail();
@@ -117,14 +120,14 @@ function updatePortfolioDetail() {
 // Event listener tombol kiri
 leftArrow.addEventListener('click', () => {
     if (leftArrow.classList.contains('disabled')) return;
-    currentIndex--;
+    currentIndex = Math.max(0, currentIndex - 1);
     updateCarousel();
 });
 
 // Event listener tombol kanan
 rightArrow.addEventListener('click', () => {
     if (rightArrow.classList.contains('disabled')) return;
-    currentIndex++;
+    currentIndex = Math.min(maxIndex, currentIndex + 1);
     updateCarousel();
 });
 
