@@ -612,38 +612,91 @@ section.active {
 }
 
 .resume-detail.skills .resume-item {
-    position: relative;  /* Mengatur posisi relatif untuk item keterampilan */
-    align-items: center;  /* Menyelaraskan elemen di dalam item secara vertikal */
-    height: auto;  /* Mengatur tinggi item keterampilan sesuai dengan konten */
+    background: var(--second-bg-color);
+    border-radius: 1.2rem;
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 18rem;
 }
 
-.resume-detail.skills .resume-item i {
-    font-size: 8.5rem;  /* Mengatur ukuran font untuk ikon keterampilan */
-    transition: .5s;  /* Menambahkan transisi untuk perubahan properti */
+.resume-detail.skills .skill-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.6rem;
+}
+
+.resume-detail.skills .skill-head div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.resume-detail.skills .skill-head i {
+    font-size: 4.5rem;
+    margin-right: 1.6rem;
+}
+
+.resume-detail.skills .skill-head .bx.bxl-html5 {
+    color: #e34f26; /* Orange untuk HTML */
+}
+
+.resume-detail.skills .skill-head .bx.bxl-css3 {
+    color: #1572b6; /* Biru untuk CSS */
+}
+
+.resume-detail.skills .skill-head .bx.bxl-c-plus-plus {
+    color: #00599c; /* Biru untuk C++ */
+}
+
+.resume-detail.skills .skill-head .bx.bx-hash {
+    color: #9b4dca; /* Ungu untuk C# */
+}
+
+.resume-detail.skills .skill-head h3 {
+    font-size: 2.2rem;
+    margin-bottom: .4rem;
+}
+
+.resume-detail.skills .skill-head span {
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    opacity: 1;
+}
+
+.resume-detail.skills .skill-bar {
+    width: 100%;
+    height: 1.4rem;
+    background: rgba(255, 255, 255, .08);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.resume-detail.skills .skill-level {
+    display: block;
+    height: 100%;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, var(--white-color), rgba(255,255,255,0.3));
+    animation: fillSkill 2s ease-out forwards;
+    width: 0%;
+}
+
+.resume-detail.skills .skill-level.html { --skill-width: 90%; }
+.resume-detail.skills .skill-level.css { --skill-width: 85%; }
+.resume-detail.skills .skill-level.cpp { --skill-width: 75%; }
+.resume-detail.skills .skill-level.csharp { --skill-width: 70%; }
+
+@keyframes fillSkill {
+    to { width: var(--skill-width); }
 }
 
 .resume-detail.skills .resume-item:hover i {
-    color: var(--main-color);  /* Mengubah warna ikon menjadi warna utama saat hover */
-}
-
-.resume-detail.skills .resume-item span {
-    position: absolute;  /* Menempatkan teks dalam posisi absolut di dalam item keterampilan */
-    top: -20%;  /* Menempatkan teks sedikit di atas item */
-    background: var(--white-color);  /* Memberikan latar belakang putih pada teks */
-    color: var(--bg-color);  /* Mengubah warna teks menjadi warna latar belakang */
-    font-size: 1.6rem;  /* Mengatur ukuran font teks */
-    padding: .5rem 1rem;  /* Memberikan padding pada teks */
-    border-radius: .6rem;  /* Membuat sudut teks melengkung */
-    pointer-events: none;  /* Menonaktifkan interaksi dengan teks */
-    opacity: 0;  /* Menyembunyikan teks */
-    transform: scale(.9);  /* Memberikan efek kecil pada teks */
-    transition: .2s;  /* Menambahkan transisi pada perubahan properti */
-}
-
-.resume-detail.skills .resume-item:hover span {
-    top: -25%;  /* Memindahkan teks sedikit lebih tinggi saat hover */
-    opacity: 1;  /* Menampilkan teks */
-    transform: scale(1);  /* Mengembalikan teks ke ukuran normal */
+    transform: scale(1.1);
+    transition: .3s;
 }
 
 .resume-detail.about .resume-list {
@@ -1060,11 +1113,95 @@ section.active {
     }
 }
 
-/* terbaru */
-.arrow-left.disabled,
-.arrow-right.disabled {
-    opacity: 0.3;
-    pointer-events: none;
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.modal-gallery {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.modal-slide {
+    width: 100%;
+    display: none;
+    border-radius: 8px;
+}
+
+.modal-slide.active {
+    display: block;
+}
+
+.modal-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    border: .2rem solid var(--main-color);
+    background: rgba(0, 0, 0, 0.45);
+    color: var(--main-color);
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modal-arrow-left {
+    left: .8rem;
+}
+
+.modal-arrow-right {
+    right: .8rem;
+}
+
+.modal-arrow:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--white-color);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--main-color);
+}
+
+.modal-actions {
+    margin-top: 1.6rem;
+    display: flex;
+    justify-content: center;
 }
 
 .disabled{

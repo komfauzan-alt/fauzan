@@ -85,6 +85,98 @@ logoLink.addEventListener('click', () => {
     }
 });
 
+// Modal functions
+const modalGalleryIndex = {};
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.style.display = 'flex';
+    if (modal.querySelector('.modal-gallery')) {
+        initModalGallery(modalId);
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+}
+
+function initModalGallery(modalId) {
+    modalGalleryIndex[modalId] = 0;
+    updateModalSlide(modalId);
+}
+
+function updateModalSlide(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const slides = modal.querySelectorAll('.modal-slide');
+    const downloadBtn = modal.querySelector('.modal-download-btn');
+    if (!slides.length) return;
+
+    let idx = modalGalleryIndex[modalId] || 0;
+    idx = Math.max(0, Math.min(idx, slides.length - 1));
+    modalGalleryIndex[modalId] = idx;
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === idx);
+    });
+
+    if (downloadBtn && slides[idx]) {
+        downloadBtn.setAttribute('href', slides[idx].getAttribute('src'));
+    }
+}
+
+function changeModalSlide(modalId, step) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const slides = modal.querySelectorAll('.modal-slide');
+    if (!slides.length) return;
+
+    let idx = (modalGalleryIndex[modalId] || 0) + step;
+
+    if (idx < 0) {
+        idx = slides.length - 1;
+    } else if (idx >= slides.length) {
+        idx = 0;
+    }
+
+    modalGalleryIndex[modalId] = idx;
+    updateModalSlide(modalId);
+}
+
+document.querySelectorAll('.modal-gallery').forEach((gallery) => {
+    let touchStartX = 0;
+
+    gallery.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].screenX;
+    }, { passive: true });
+
+    gallery.addEventListener('touchend', (event) => {
+        const modalEl = gallery.closest('.modal');
+        if (!modalEl || !modalEl.id) return;
+
+        const touchEndX = event.changedTouches[0].screenX;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) < 40) return;
+        if (swipeDistance > 0) {
+            changeModalSlide(modalEl.id, -1);
+        } else {
+            changeModalSlide(modalEl.id, 1);
+        }
+    }, { passive: true });
+});
+
 // ================= Carousel Portfolio ================= //
 let currentIndex = 0;
 const carousel = document.querySelector('.img-slide');
