@@ -179,13 +179,13 @@ document.querySelectorAll('.modal-gallery').forEach((gallery) => {
 
 // ================= Carousel Portfolio ================= //
 let currentIndex = 0;
-const carousel = document.querySelector('.img-slide');
-const images = document.querySelectorAll('.img-item');
-const leftArrow = document.querySelector('.arrow-left');
-const rightArrow = document.querySelector('.arrow-right');
-const portfolioDetailsList = document.querySelectorAll('.portfolio-detail');
+const carousel = document.querySelector('.portfolio-carousel .img-slide');
+const images = document.querySelectorAll('.portfolio-carousel .img-item');
+const leftArrow = document.querySelector('.portfolio-box .arrow-left');
+const rightArrow = document.querySelector('.portfolio-box .arrow-right');
+const portfolioDetailsList = document.querySelectorAll('.portfolio-box:first-child .portfolio-detail');
 
-// Pastikan carousel tidak berjalan melewati jumlah detail (nomor) yang tersedia
+// Batas geser = jumlah item terkecil antara detail teks dan gambar carousel
 const maxIndex = Math.min(images.length, portfolioDetailsList.length) - 1;
 
 function updateCarousel() {
