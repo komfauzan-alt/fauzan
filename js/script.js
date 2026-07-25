@@ -85,6 +85,13 @@ logoLink.addEventListener('click', () => {
     }
 });
 
+// Tombol "Hubungi Saya" di home biar ikut sistem navigasi SPA
+const hubungiSayaBtn = document.querySelector('#hubungiSayaBtn');
+hubungiSayaBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    navLinks[4].click(); // index 4 = "Kontak" di nav, urutannya: Beranda,Layanan,Resume,Portofolio,Kontak
+});
+
 // Modal functions
 const modalGalleryIndex = {};
 

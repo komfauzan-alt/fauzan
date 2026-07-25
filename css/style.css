@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -7,38 +7,35 @@
     text-decoration: none;
     border: none;
     outline: none;
-    font-family: "Poppins", sans-serif;
+    font-family: "Jost", sans-serif;
 }
 
 :root {
-    /* Latar Belakang Utama Tetap */
-    --bg-color: #111318; /* Tetap gelap biru yang kalem dan elegan */
+    /* Malam / moonlight palette */
+    --bg-color: #090c14;                 /* langit malam, hampir hitam */
+    --second-bg-color: linear-gradient(160deg, rgba(30, 38, 62, .92), rgba(48, 57, 88, .82));
+    --panel-border: rgba(216, 196, 143, .18);
 
-    /* Latar Belakang Kedua - Gradasi menyesuaikan bg-color */
-    --second-bg-color: linear-gradient(135deg, #2b343f, #44505c); 
-    /* Gradasi dari warna gelap kebiruan ke abu kebiruan, tetap modern & kalem, cocok dengan --bg-color */
+    --main-color: #d8c48f;               /* emas cahaya bulan */
+    --main-color-soft: rgba(216, 196, 143, .35);
+    --moon-silver: #cdd7ea;              /* aksen dingin, cahaya pantulan bulan */
 
-    /* Warna Utama - Glow kalem yang harmonis dengan latar */
-    --main-color: #33cc99; /* Tetap dipertahankan karena kontrasnya bagus dengan latar gelap */
-
-    /* Warna Putih Bersih */
-    --white-color: #ddd6d6; /* Untuk teks/ikon agar tetap jelas di latar gelap */
-
-    /* Warna Non-Aktif */
-    --disable-color: rgba(255, 255, 255, 0.35); 
-    /* Sedikit dikurangi transparansinya agar lebih lembut di atas warna bg-color */
+    --white-color: #eae6da;              /* ivory hangat, bukan putih plain */
+    --disable-color: rgba(234, 230, 218, .3);
 }
 
-
-
-/* Glow effect pada teks */
-h1, h2, h3, .main-button {
-    text-shadow: 0 0 10px rgba(51, 204, 153, 0.8), 0 0 20px rgba(51, 204, 153, 0.6);
+h1, h2, h3 {
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: .03em;
 }
 
-/* Glow effect pada tombol */
+/* Glow lembut ala cahaya bulan, bukan neon nyala */
+h1, h2, h3 {
+    text-shadow: 0 0 18px rgba(216, 196, 143, .35);
+}
+
 button, .main-button {
-    box-shadow: 0 0 10px rgba(51, 204, 153, 0.8), 0 0 20px rgba(51, 204, 153, 0.6);
+    box-shadow: 0 0 14px rgba(216, 196, 143, .25);
     border: none;
 }
 
@@ -48,9 +45,55 @@ html {
 
 body {
     color: var(--white-color);
-    background:var(--bg-color) ;
+    background: var(--bg-color);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
 
+/* Starfield tetap, fixed di belakang semua section */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, rgba(234,230,218,.9), transparent),
+        radial-gradient(1.5px 1.5px at 28% 64%, rgba(234,230,218,.7), transparent),
+        radial-gradient(1px 1px at 42% 30%, rgba(234,230,218,.6), transparent),
+        radial-gradient(1.5px 1.5px at 58% 78%, rgba(234,230,218,.8), transparent),
+        radial-gradient(1px 1px at 73% 22%, rgba(234,230,218,.5), transparent),
+        radial-gradient(1.5px 1.5px at 85% 55%, rgba(234,230,218,.7), transparent),
+        radial-gradient(1px 1px at 93% 85%, rgba(234,230,218,.6), transparent),
+        radial-gradient(1.5px 1.5px at 5% 92%, rgba(234,230,218,.6), transparent),
+        radial-gradient(1px 1px at 65% 8%, rgba(234,230,218,.5), transparent);
+    background-repeat: repeat;
+    background-size: 100% 100%;
+    animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0%   { opacity: .5; }
+    100% { opacity: 1; }
+}
+
+/* Bulan sabit dekoratif, statis di pojok, jangan norak jadi kecil & samar */
+body::after {
+    content: '';
+    position: fixed;
+    top: 6%;
+    right: 8%;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f3ecd6, var(--main-color) 60%, transparent 72%);
+    box-shadow:
+        -4.5rem -1rem 0 -1rem var(--bg-color),
+        0 0 6rem rgba(216, 196, 143, .25);
+    opacity: .5;
+    z-index: 0;
+    pointer-events: none;
 }
 
 header {
@@ -59,7 +102,9 @@ header {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: var(--bg-color);
+    background: rgba(9, 12, 20, .75);
+    backdrop-filter: blur(.8rem);
+    border-bottom: .1rem solid var(--panel-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,52 +126,39 @@ header.active {
 }
 
 .logo {
-    font-size: 3rem;
-    color: var(--white-color);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 3.2rem;
     font-weight: 700;
+    color: var(--white-color);
+    letter-spacing: .06em;
 }
 
 nav a {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: var(--white-color);
     font-weight: 500;
     margin-left: 3.5rem;
-    position: relative; /* Pastikan elemen ini bisa mendapat posisi untuk animasi */
-    opacity: 0; /* Mulai dengan elemen tidak terlihat */
-    animation: show-nav-link 0.6s ease-out forwards; /* Aplikasikan animasi */
+    position: relative;
+    opacity: 0;
+    animation: show-nav-link 0.6s ease-out forwards;
 }
-
 
 @keyframes show-nav-link {
     0% {
         opacity: 0;
-        transform: translateY(-30px); /* Mulai dari bawah */
+        transform: translateY(-30px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* Bergerak ke posisi normal */
+        transform: translateY(0);
     }
 }
 
-nav a:nth-child(1) {
-    animation-delay: 0.1s; /* Tunda sedikit per link */
-}
-
-nav a:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-nav a:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-nav a:nth-child(4) {
-    animation-delay: 0.4s;
-}
-
-nav a:nth-child(5) {
-    animation-delay: 0.5s;
-}
+nav a:nth-child(1) { animation-delay: 0.1s; }
+nav a:nth-child(2) { animation-delay: 0.2s; }
+nav a:nth-child(3) { animation-delay: 0.3s; }
+nav a:nth-child(4) { animation-delay: 0.4s; }
+nav a:nth-child(5) { animation-delay: 0.5s; }
 
 nav a:hover,
 nav a.active {
@@ -136,6 +168,7 @@ nav a.active {
 #menu-icon {
     font-size: 4rem;
     display: none;
+    color: var(--white-color);
 }
 
 .bars-box {
@@ -153,54 +186,29 @@ nav a.active {
     animation-delay: calc(.1s * var(--i));
 }
 
-@keyframes hide-bars {
-    0% {
-        transform: translateY(0%);
-    }
-
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
-.bars-box .active .bar {
-    animation: show-bars .5s ease-in-out both;
-    animation-delay: calc(1.s * var(--i));
-}
-
-@keyframes hide-bars {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
 .bars-box.active .bar {
     animation: show-bars .5s ease-in-out both;
     animation-delay: calc(.1s * var(--i));
 }
 
-@keyframes show-bars {
-    0% {
-        transform: translateY(-100%);
-    }
+@keyframes hide-bars {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
 
-    100% {
-        transform: translateY(0);
-    }
+@keyframes show-bars {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
 }
 
 section {
     position: absolute;
-    inset: 0; /* shortcut untuk top: 0; left: 0; right: 0; bottom: 0 */
+    inset: 0;
     padding: 10rem 9% 2rem;
     visibility: hidden;
     opacity: 0;
-    overflow-y: auto;  /* biar konten tetap bisa discroll jika lebih tinggi dari layar */
-    z-index: 1; /* pastikan tidak tertimpa */
+    overflow-y: auto;
+    z-index: 1;
 }
 
 section.active {
@@ -215,410 +223,512 @@ section.active {
         overflow: auto;
     }
 }
+
 .home {
-    display: flex; /* Menggunakan layout flex untuk elemen-elemen di dalamnya */
-    align-items: center; /* Menyelaraskan elemen secara vertikal di tengah */
-    gap: .5rem; /* Memberikan jarak antar elemen sebesar 0.5rem */
+    display: flex;
+    align-items: center;
+    gap: 5rem;
 }
 
 .home-detail h1 {
-    font-size: clamp(3.5rem, 10vw, 5.5rem); /* Ukuran font judul utama, menyesuaikan lebar layar antara 3.5rem hingga 5.5rem */
-}
-
-@keyframes show-content {
-    100% {
-        visibility: visible; /* Elemen menjadi terlihat */
-        opacity: 1; /* Opasitas menjadi penuh (terlihat jelas) */
-        overflow: auto; /* Mengatur overflow agar bisa ditampilkan jika ada konten yang meluap */
-    }
-}
-
-.home {
-    display: flex; /* Layout flex untuk elemen-elemen di dalamnya */
-    align-items: center; /* Menyelaraskan elemen secara vertikal di tengah */
-    gap: 5rem; /* Memberikan jarak antar elemen sebesar 5rem */
-}
-
-.home-detail h1 {
-    font-size: clamp(3.5rem, 10vw, 5.5rem); /* Ukuran font judul utama, menyesuaikan lebar layar antara 3.5rem hingga 5.5rem */
+    font-size: clamp(4rem, 10vw, 6.2rem);
+    font-weight: 700;
 }
 
 .home-detail h2 {
-    display: inline-block; /* Menampilkan elemen h2 sebagai inline-block */
-    font-size: 3.2rem; /* Ukuran font untuk h2 */
-    margin-top: -1rem; /* Memberikan margin negatif di atas h2 agar posisinya lebih naik */
+    display: inline-block;
+    font-family: "Jost", sans-serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-top: .6rem;
+    color: var(--moon-silver);
 }
 
 .home-detail h2 span {
-    position: relative; /* Menentukan posisi relatif untuk elemen span */
-    display: inline-block; /* Menampilkan span sebagai inline-block */
-    color: transparent; /* Membuat warna teks menjadi transparan */
-    -webkit-text-stroke: .07rem var(--main-color); /* Memberikan stroke (garis tepi) pada teks dengan warna utama */
-    
-    animation: display-text 16s linear infinite; /* Menambahkan animasi untuk teks muncul dan hilang */
-    animation-delay: calc(-4s * var(--i)); /* Menunda animasi dengan interval tertentu */
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: .06rem var(--main-color);
+    animation: display-text 16s linear infinite;
+    animation-delay: calc(-4s * var(--i));
 }
 
 @keyframes display-text {
-    25%, 100% {
-        display: none; /* Teks disembunyikan pada 25% dan 100% dari durasi animasi */
-    }
+    25%, 100% { display: none; }
 }
 
 .home-detail h2 span::before {
-    content: attr(data-text); /* Mengambil teks yang ada di atribut data-text */
-    position: absolute; /* Posisi teks diatur secara absolut */
-    width: 0; /* Menyembunyikan teks pada awalnya */
-    border-right: .2rem solid var(--main-color); /* Memberikan border kanan dengan warna utama */
-    color: var(--main-color); /* Mengatur warna teks sesuai dengan warna utama */
-    white-space: nowrap; /* Tidak ada pemotongan kata */
-    overflow: hidden; /* Menghilangkan teks yang melebihi batas */
-    animation: fill-text 4s linear infinite; /* Animasi untuk mengisi teks secara perlahan */
+    content: attr(data-text);
+    position: absolute;
+    width: 0;
+    border-right: .2rem solid var(--main-color);
+    color: var(--main-color);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: fill-text 4s linear infinite;
 }
 
 @keyframes fill-text {
-    10%, 100% {
-        width: 0; /* Membuat lebar teks 0 pada awal dan akhir animasi */
-    }
-    
-    70%, 90% {
-        width: 100%; /* Membuat lebar teks penuh pada 70% dan 90% durasi animasi */
-    }
+    10%, 100% { width: 0; }
+    70%, 90%  { width: 100%; }
 }
 
 .home-detail p {
-    font-size: 1.6rem; /* Ukuran font untuk paragraf */
-    margin: 1rem 0 2.5rem; /* Memberikan margin atas dan bawah untuk paragraf */
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: var(--white-color);
+    opacity: .85;
+    margin: 1.4rem 0 2.5rem;
+    max-width: 48rem;
 }
 
 .home-detail .btn-sci {
-    display: flex; /* Menampilkan tombol sosial media dengan layout flex */
-    align-items: center; /* Menyelaraskan tombol-tombol secara vertikal */
+    display: flex;
+    align-items: center;
 }
 
 .btn {
-    display: inline-block; /* Tombol ditampilkan sebagai inline-block */
-    padding: 1rem 3rem; /* Memberikan padding di dalam tombol */
-    background: var(--main-color); /* Memberikan background dengan warna utama */
-    border: .2rem solid var(--main-color); /* Memberikan border dengan warna utama */
-    border-radius: 4rem; /* Memberikan border radius untuk membuat tombol berbentuk melengkung */
-    box-shadow: 0 0 1rem var(--main-color); /* Memberikan bayangan pada tombol dengan warna utama */
-    font-size: 1.6rem; /* Ukuran font pada tombol */
-    color: var(--bg-color); /* Mengatur warna teks pada tombol sesuai dengan warna background */
-    font-weight: 500; /* Menentukan ketebalan font */
-    transition: .5s; /* Memberikan transisi halus selama 0.5 detik */
+    display: inline-block;
+    padding: 1.1rem 3.2rem;
+    background: transparent;
+    border: .15rem solid var(--main-color);
+    border-radius: .4rem;
+    box-shadow: 0 0 1.2rem rgba(216, 196, 143, .2);
+    font-size: 1.5rem;
+    letter-spacing: .05em;
+    color: var(--main-color);
+    font-weight: 500;
+    transition: .4s;
 }
 
 .btn:hover {
-    background: transparent; /* Mengubah background menjadi transparan saat di-hover */
-    color: var(--main-color); /* Mengubah warna teks menjadi warna utama */
-    box-shadow: none; /* Menghilangkan bayangan saat di-hover */
+    background: var(--main-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 2rem rgba(216, 196, 143, .5);
 }
 
 .home-detail .btn-sci .sci {
-    margin-left: 2rem; /* Memberikan margin kiri pada elemen sosial media */
+    margin-left: 2rem;
 }
 
 .home-detail .btn-sci .sci a {
-    display: inline-flex; /* Menampilkan ikon sosial media dengan layout inline-flex */
-    padding: .8rem; /* Memberikan padding pada ikon */
-    border: .2rem solid var(--main-color); /* Memberikan border dengan warna utama */
-    border-radius: 50%; /* Membuat border menjadi lingkaran */
-    font-size: 2rem; /* Ukuran font untuk ikon sosial media */
-    color: var(--main-color); /* Warna ikon sosial media sesuai dengan warna utama */
-    margin: 0 .8rem; /* Memberikan margin kiri dan kanan pada ikon */
-    transition: .5s; /* Menambahkan transisi halus pada ikon */
+    display: inline-flex;
+    padding: .8rem;
+    border: .15rem solid var(--panel-border);
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--moon-silver);
+    margin: 0 .6rem;
+    transition: .4s;
 }
 
-.home-detail .btn-sci .sci a:hover {
-    background: var(--main-color); /* Memberikan background dengan warna utama saat di-hover */
-    color: var(--bg-color); /* Mengubah warna ikon menjadi warna background saat di-hover */
-    box-shadow: 0 0 1rem var(--main-color); /* Memberikan bayangan pada ikon saat di-hover */
-}
-
+.home-detail .btn-sci .sci a:hover,
 .home-detail .btn-sci .sci a:visited,
 .home-detail .btn-sci .sci a:focus,
 .home-detail .btn-sci .sci a:active {
-    color: var(--main-color); /* Reset warna ikon setelah diklik */
-    background: transparent; /* Pastikan background tidak tetap hijau */
-    box-shadow: none; /* Hapus bayangan saat sudah diklik */
+    background: transparent;
+    box-shadow: none;
 }
 
+.home-detail .btn-sci .sci a:hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+/* Foto profil dengan halo bulan statis, bukan spin ijo */
 .home-img .img-box {
-    position: relative; /* Menentukan posisi relatif untuk gambar */
-    width: 32vw; /* Lebar gambar 32% dari lebar tampilan */
-    height: 32vw; /* Tinggi gambar 32% dari lebar tampilan */
-    border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
-    padding: .5rem; /* Memberikan padding pada gambar */
-    display: flex; /* Menggunakan layout flex untuk menata gambar */
-    justify-content: center; /* Menyelaraskan gambar di tengah secara horizontal */
-    align-items: center; /* Menyelaraskan gambar di tengah secara vertikal */
-    overflow: hidden; /* Menyembunyikan bagian gambar yang meluap */
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 63% 37% 54% 46% / 43% 41% 59% 57%;
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: moon-blob 13s ease-in-out infinite;
 }
 
-.home-img .img-box::before,
+@keyframes moon-blob {
+    0%, 100% { border-radius: 63% 37% 54% 46% / 43% 41% 59% 57%; }
+    50%      { border-radius: 42% 58% 68% 32% / 55% 42% 58% 45%; }
+}
+
+.home-img .img-box::before {
+    content: '';
+    position: absolute;
+    inset: -1.2rem;
+    border-radius: inherit;
+    background: conic-gradient(from 0deg, var(--main-color), var(--moon-silver), var(--main-color));
+    animation: rotate-border 14s linear infinite, moon-blob 13s ease-in-out infinite;
+    opacity: .85;
+}
+
 .home-img .img-box::after {
-    content: ''; /* Menambahkan konten kosong untuk border animasi */
-    position: absolute; /* Posisi border diatur absolut */
-    width: 50rem; /* Lebar border 50rem */
-    height: 50rem; /* Tinggi border 50rem */
-    background: conic-gradient(transparent, transparent, transparent, var(--main-color)); /* Membuat border dengan gradien berputar */
-    transform: rotate(0deg); /* Rotasi awal border */
-    animation: rotate-border 9s linear infinite; /* Animasi untuk border berputar terus-menerus */
-}
-
-.home-img .img-box::after { 
-    animation-delay: -5s; /* Menunda animasi border belakang */
+    content: '';
+    position: absolute;
+    inset: -3rem;
+    border-radius: inherit;
+    box-shadow: 0 0 6rem rgba(216, 196, 143, .25);
+    z-index: -1;
 }
 
 @keyframes rotate-border {
-    100% {
-        transform: rotate(360deg); /* Membuat border berputar 360 derajat */
-    }
+    100% { transform: rotate(360deg); }
 }
 
 .home-img .img-box .img-item {
-    position: relative; /* Menentukan posisi relatif untuk item gambar */
-    width: 100%; /* Lebar gambar 100% dari lebar kontainer */
-    height: 100%; /* Tinggi gambar 100% dari tinggi kontainer */
-    background: var(--bg-color); /* Background gambar sesuai dengan warna background */
-    border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
-    border: .01rem solid var(--bg-color); /* Memberikan border tipis dengan warna background */
-    display: flex; /* Menggunakan layout flex */
-    justify-content: center; /* Menyelaraskan gambar di tengah secara horizontal */
-    z-index: 1; /* Menentukan urutan lapisan gambar */
-    overflow: hidden; /* Menyembunyikan bagian gambar yang meluap */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    border-radius: inherit;
+    border: .01rem solid var(--bg-color);
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+    animation: moon-blob 13s ease-in-out infinite;
 }
 
 .home-img .img-box .img-item img {
-    position: absolute; /* Posisi gambar diatur absolut */
-    top: 3rem; /* Memberikan jarak 3rem dari atas kontainer */
-    display: block; /* Menampilkan gambar sebagai block */
-    width: 85%; /* Gambar mengambil 85% dari lebar kontainer */
-    object-fit: cover; /* Menyesuaikan gambar dengan kontainer tanpa merusak proporsi */
-    mix-blend-mode: lighten; /* Mencampur gambar dengan efek pencahayaan */
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: normal;
 }
 
 .heading {
-    font-size: 4.5rem; /* Ukuran font untuk heading */
-    text-align: center; /* Menyelaraskan teks di tengah */
-    margin-bottom: 2rem; /* Memberikan jarak bawah pada heading */
+    font-size: 4.6rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 .heading span {
-    color: var(--main-color); /* Memberikan warna utama pada bagian span di dalam heading */
+    color: var(--main-color);
 }
 
-
+/* ===== Services ===== */
 .services-container {
-    display: grid;  /* Menggunakan grid layout untuk menata elemen dalam container */
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));  /* Membuat kolom responsif, ukuran minimum 30rem, dan kolom menyesuaikan lebar layar */
-    gap: 2rem;  /* Memberikan jarak antar elemen di dalam grid */
+    max-width: 90rem;
+    margin: 0 auto;
 }
 
+/* List bergaris tipis, bukan kartu kotak — icon jadi penanda kiri */
 .services-container .services-box {
-    padding: 3rem 2.5rem;  /* Memberikan padding di dalam kotak layanan */
-    background: var(--second-bg-color);  /* Warna latar belakang kotak layanan, diambil dari variabel CSS */
-    border: .2rem solid var(--second-bg-color);  /* Memberikan border dengan warna yang sama dengan latar belakang */
-    border-radius: 1rem;  /* Memberikan sudut border yang melengkung */
-    transition: .5s;  /* Menambahkan efek transisi untuk perubahan properti CSS */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 2.8rem;
+    row-gap: .6rem;
+    align-items: start;
+    padding: 2.8rem 0;
+    background: transparent;
+    border: none;
+    border-top: .1rem solid var(--panel-border);
+    border-radius: 0;
+    position: relative;
+    transition: .4s;
+}
+
+.services-container .services-box:last-child {
+    border-bottom: .1rem solid var(--panel-border);
+}
+
+.services-container .services-box::before {
+    content: '';
+    position: absolute;
+    top: -.1rem;
+    left: 0;
+    width: 0;
+    height: .15rem;
+    background: var(--main-color);
+    box-shadow: 0 0 .8rem rgba(216, 196, 143, .6);
+    transition: width .5s ease;
+}
+
+.services-container .services-box:hover::before {
+    width: 100%;
 }
 
 .services-container .services-box:hover {
-    border-color: var(--main-color);  /* Mengubah warna border saat hover */
-    transform: scale(1.02);  /* Memberikan efek pembesaran sedikit saat hover */
+    transform: translateX(.6rem);
 }
 
 .services-box .icon {
-    display: flex;  /* Menggunakan flexbox untuk menata ikon */
-    justify-content: space-between;  /* Menyebar elemen di dalam flex container */
-    align-items: center;  /* Menyelaraskan elemen secara vertikal di tengah */
+    grid-row: 1 / 3;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding-top: .3rem;
 }
 
-.services-box .icon i {
-    color: black;  /* Mengubah warna ikon menjadi hitam */
-    font-size: 4.5rem;  /* Mengatur ukuran font ikon */
-    transition: .5s;  /* Menambahkan transisi pada perubahan warna atau transformasi */
+.services-box .icon i:first-child {
+    color: var(--main-color);
+    font-size: 3.8rem;
+    transition: .4s;
 }
 
-.services-box .icon:hover i {
-    color: black;  /* Pastikan warna ikon tetap hitam saat hover */
-}
-
-.services-box:hover .icon :not(a i) {
-    color: black;  /* Mengatur warna ikon yang bukan bagian dari tag <a> tetap hitam saat hover */
+.services-box:hover .icon i:first-child {
+    text-shadow: 0 0 1.6rem rgba(216, 196, 143, .7);
 }
 
 .services-box .icon a {
-    display: inline-flex;  /* Membuat elemen link <a> menggunakan flexbox inline */
-    background: var(--white-color);  /* Memberikan latar belakang putih pada link */
-    border-radius: 50%;  /* Membuat link berbentuk lingkaran */
-    padding: 1rem;  /* Memberikan padding di dalam link */
-    transition: .5s;  /* Menambahkan transisi saat hover */
+    display: inline-flex;
+    background: transparent;
+    border: .1rem solid var(--panel-border);
+    border-radius: 50%;
+    padding: .7rem;
+    transition: .4s;
 }
 
 .services-box:hover .icon a {
-    background: var(--main-color);  /* Mengubah latar belakang link menjadi warna utama saat hover */
+    background: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .services-box .icon a i {
-    font-size: 3rem;  /* Mengatur ukuran font ikon di dalam link */
-    color: var(--bg-color);  /* Mengatur warna ikon berdasarkan variabel latar belakang */
-    transform: rotate(225deg);  /* Memberikan efek rotasi pada ikon */
+    font-size: 1.8rem;
+    color: var(--white-color);
+    transform: rotate(225deg);
+    transition: .4s;
 }
 
-.services-box .icon a:hover i {
-    transform: rotate(180deg);  /* Mengubah rotasi ikon saat hover */
-} 
-
-.service-box h3 {
-    font-size: 3rem;  /* Mengatur ukuran font judul layanan */
-    margin: 5rem 0 2rem;  /* Memberikan margin atas dan bawah pada judul */
-    transition: .5s;  /* Menambahkan transisi saat perubahan properti */
+.services-box:hover .icon a i {
+    transform: rotate(180deg);
+    color: var(--bg-color);
 }
 
-.service-box:hover h3 {
-    color: var(--main-color);  /* Mengubah warna teks judul menjadi warna utama saat hover */
+.services-box h3 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 2.6rem;
+    margin: 0;
+    color: var(--white-color);
+    transition: .4s;
+}
+
+.services-box:hover h3 {
+    color: var(--main-color);
 }
 
 .services-box p {
-    font-size: 1.6rem;  /* Mengatur ukuran font teks deskripsi layanan */
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 1.6rem;
+    color: var(--white-color);
+    opacity: .75;
+    line-height: 1.6;
+    max-width: 46rem;
 }
 
-/* Mengganti warna teks */
-.services h3, .services p {
-    color: black;  /* Mengubah warna teks menjadi hitam */
-}
-
- /* Mengganti warna ikon */
-.services .icon i {
-    color: black;  /* Mengubah warna ikon menjadi hitam */
-}
-
- /* Mengganti warna ikon arrow (tanda panah) */
-.services .icon a i {
-    color: black;  /* Mengubah warna ikon panah menjadi hitam */
-} 
-
+/* ===== Resume ===== */
 .resume-container {
-    display: grid;  /* Menggunakan grid layout untuk menata elemen di dalam container */
-    grid-template-columns: 1fr 2fr;  /* Membuat dua kolom, kolom pertama lebar 1fr dan kolom kedua 2fr */
-    gap: 5rem;  /* Menambahkan jarak antar elemen di dalam grid */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
 }
 
 .resume-box h2 {
-    font-size: 4.5rem;  /* Mengatur ukuran font untuk judul di dalam box resume */
+    font-size: 4.2rem;
+    color: var(--white-color);
 }
 
 .resume-box p {
-    font-size: 1.6rem;  /* Mengatur ukuran font untuk teks deskripsi di dalam box resume */
+    font-size: 1.6rem;
 }
 
 .resume-box .desc {
-    margin: 2rem 0 2.5rem;  /* Memberikan margin atas dan bawah pada deskripsi resume */
+    margin: 2rem 0 2.5rem;
+    color: var(--white-color);
+    opacity: .8;
+    line-height: 1.7;
 }
 
 .resume-box .resume-btn {
-    width: 100%;  /* Tombol akan mengisi seluruh lebar elemen */
-    height: 5.3rem;  /* Menentukan tinggi tombol */
-    background: var(--second-bg-color);  /* Memberikan warna latar belakang untuk tombol */
-    border: .2rem solid var(--second-bg-color);  /* Border tombol dengan warna latar belakang */
-    font-size: 1.6rem;  /* Ukuran font pada tombol */
-    color: var(--white-color);  /* Mengatur warna teks tombol */
-    font-weight: 500;  /* Menetapkan ketebalan font */
-    margin-bottom: 2rem;  /* Memberikan margin bawah pada tombol */
-    border-radius: .8rem;  /* Membuat sudut tombol melengkung */
-    cursor: pointer;  /* Menampilkan kursor pointer saat hover pada tombol */
+    width: 100%;
+    height: 5.3rem;
+    background: transparent;
+    border: .1rem solid var(--panel-border);
+    font-size: 1.5rem;
+    letter-spacing: .04em;
+    color: var(--white-color);
+    font-weight: 500;
+    margin-bottom: 1.4rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.resume-box .resume-btn:hover {
+    border-color: var(--main-color-soft);
 }
 
 .resume-box .resume-btn.active {
-    border-color: var(--main-color);  /* Mengubah warna border tombol ketika tombol aktif */
-    color: var(--main-color);  /* Mengubah warna teks tombol ketika tombol aktif */
+    border-color: var(--main-color);
+    color: var(--main-color);
+    background: rgba(216, 196, 143, .08);
 }
 
 .resume-detail {
-    display: none;  /* Menyembunyikan elemen dengan class .resume-detail */
+    display: none;
 }
 
 .resume-detail.active {
-    display: block;  /* Menampilkan elemen dengan class .resume-detail ketika aktif */
+    display: block;
 }
 
 .resume-box .heading {
-    font-size: 3.5rem;  /* Mengatur ukuran font untuk heading di dalam box resume */
-    text-align: left;  /* Menyelaraskan teks ke kiri */
+    font-size: 3.4rem;
+    text-align: left;
+}
+
+.resume .desc {
+    color: var(--white-color);
+    opacity: .8;
 }
 
 .resume-list {
-    display: grid;  /* Menggunakan grid layout untuk daftar resume */
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));  /* Menyesuaikan kolom agar responsif */
-    gap: 2rem;  /* Memberikan jarak antar elemen di dalam grid */
-    height: 45rem;  /* Mengatur tinggi daftar resume */
-    overflow: auto;  /* Menambahkan scroll jika konten melampaui tinggi elemen */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+    height: 45rem;
+    overflow: auto;
 }
 
 .resume-list::-webkit-scrollbar {
-    width: .7rem;  /* Menentukan lebar scrollbar */
+    width: .6rem;
 }
 
 .resume-list::-webkit-scrollbar-thumb {
-    background: transparent;  /* Membuat scrollbar thumb transparan */
-    border-radius: 1rem;  /* Menambahkan border radius pada scrollbar thumb */
+    background: transparent;
+    border-radius: 1rem;
 }
 
 .resume-list:hover::-webkit-scrollbar-thumb {
-    background: var(--main-color);  /* Mengubah warna scrollbar thumb saat hover */
+    background: var(--main-color-soft);
 }
 
 .resume-list .resume-item {
-    background: var(--second-bg-color);  /* Memberikan latar belakang untuk tiap item resume */
-    border-radius: .8rem;  /* Membuat sudut melengkung pada item resume */
-    padding: 3rem 2.5rem;  /* Menambahkan padding di dalam item resume */
-    height: calc((45rem - 2rem) / 2);  /* Mengatur tinggi item resume agar pas dalam grid */
-    display: flex;  /* Menggunakan flexbox untuk menata isi item resume */
-    flex-direction: column;  /* Mengatur item dalam kolom vertikal */
-    justify-content: center;  /* Menyelaraskan konten item secara vertikal */
-}
-
-.resume-item .year {
-    color: var(--main-color);  /* Mengubah warna tahun menjadi warna utama */
-}
-
-.resume-item h3 {
-    font-size: 2.2rem;  /* Mengatur ukuran font untuk judul pekerjaan atau pengalaman */
-}
-
-.resume-item .company {
-    position: relative;  /* Mengatur posisi relatif untuk elemen perusahaan */
-    margin-left: 2rem;  /* Memberikan jarak sebelah kiri pada elemen perusahaan */
-    margin-bottom: 2rem;  /* Memberikan jarak bawah pada elemen perusahaan */
-}
-
-.resume-item .company::before {
-    content: '';  /* Menambahkan konten kosong untuk pseudo-element */
-    position: absolute;  /* Menempatkan pseudo-element secara absolut di dalam elemen perusahaan */
-    top: 50%;  /* Menyelaraskan pseudo-element di tengah vertikal */
-    transform: translateY(-50%);  /* Menggeser pseudo-element agar tepat di tengah vertikal */
-    padding: .5rem;  /* Memberikan padding pada pseudo-element */
-    background: var(--main-color);  /* Memberikan warna latar belakang pada pseudo-element */
-    border-radius: 50%;  /* Membuat pseudo-element berbentuk lingkaran */
-    margin-left: -2rem;  /* Mengatur margin kiri pseudo-element */
-}
-
-.resume-detail.skills .resume-list {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));  /* Mengatur grid untuk bagian keterampilan agar responsif */
-    height: auto;  /* Membiarkan tinggi daftar keterampilan sesuai dengan konten */
-    overflow: visible;  /* Menghilangkan overflow */
-}
-
-.resume-detail.skills .resume-item {
     background: var(--second-bg-color);
-    border-radius: 1.2rem;
-    padding: 2.2rem;
+    border: .1rem solid var(--panel-border);
+    border-radius: .6rem;
+    padding: 3rem 2.5rem;
+    height: calc((45rem - 2rem) / 2);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 18rem;
+}
+
+.resume-item .year {
+    color: var(--main-color);
+    font-size: 1.4rem;
+    letter-spacing: .05em;
+}
+
+.resume-item h3 {
+    font-size: 2.2rem;
+    color: var(--white-color);
+    margin: .4rem 0;
+}
+
+.resume-item .company {
+    position: relative;
+    margin-left: 2rem;
+    margin-bottom: 1.2rem;
+    color: var(--moon-silver);
+    opacity: .85;
+}
+
+.resume-item .company::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: .4rem;
+    background: var(--main-color);
+    border-radius: 50%;
+    margin-left: -2rem;
+}
+
+/* Experience & Education */
+/* Timeline bergaris tipis — bukan kartu kotak */
+.resume-detail.experience .resume-list,
+.resume-detail.education .resume-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    grid-template-columns: unset;
+    height: 45rem;
+    overflow: auto;
+    padding: .5rem .5rem .5rem 0;
+}
+
+.resume-detail.experience .resume-list .resume-item,
+.resume-detail.education .resume-list .resume-item {
+    background: transparent;
+    border: none;
+    border-left: .15rem solid var(--panel-border);
+    border-radius: 0;
+    padding: .2rem 0 .2rem 2.6rem;
+    height: auto;
+    box-shadow: none;
+    position: relative;
+    transition: border-color .4s;
+}
+
+.resume-detail.experience .resume-list .resume-item::before,
+.resume-detail.education .resume-list .resume-item::before {
+    content: '';
+    position: absolute;
+    left: -.6rem;
+    top: .5rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: var(--main-color);
+    box-shadow: 0 0 1rem rgba(216, 196, 143, .7);
+}
+
+.resume-detail.experience .resume-list .resume-item:hover,
+.resume-detail.education .resume-list .resume-item:hover {
+    border-left-color: var(--main-color);
+}
+
+.resume-detail.experience .resume-item p,
+.resume-detail.education .resume-item p {
+    margin: .4rem 0;
+    font-size: 1.6rem;
+    color: var(--white-color);
+    opacity: .85;
+    line-height: 1.6;
+    text-align: left;
+    word-break: break-word;
+}
+
+/* Skills */
+.resume-detail.skills .resume-list {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    height: auto;
+    overflow: visible;
+}
+
+.resume-detail.skills .resume-item {
+    background: transparent;
+    border: none;
+    border-top: .1rem solid var(--panel-border);
+    border-radius: 0;
+    padding: 2.2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 14rem;
 }
 
 .resume-detail.skills .skill-head {
@@ -635,60 +745,38 @@ section.active {
 }
 
 .resume-detail.skills .skill-head i {
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-right: 1.6rem;
-}
-
-.resume-detail.skills .skill-head .bx.bxl-html5 {
-    color: #e34f26; /* Orange untuk HTML */
-}
-
-.resume-detail.skills .skill-head .bx.bxl-css3 {
-    color: #1572b6; /* Biru untuk CSS */
-}
-
-.resume-detail.skills .skill-head .bx.bxl-c-plus-plus {
-    color: #00599c; /* Biru untuk C++ */
-}
-
-.resume-detail.skills .skill-head .bx.bx-hash {
-    color: #9b4dca; /* Ungu untuk C# */
+    color: var(--moon-silver);
 }
 
 .resume-detail.skills .skill-head h3 {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     margin-bottom: .4rem;
+    color: var(--white-color);
 }
 
 .resume-detail.skills .skill-head span {
-    color: var(--white-color);
-    font-size: 1.6rem;
+    color: var(--main-color);
+    font-size: 1.5rem;
     font-weight: 500;
-    opacity: 1;
 }
 
-.resume-detail.skills .skill-bar {
-    width: 100%;
-    height: 1.4rem;
-    background: rgba(255, 255, 255, .08);
-    border-radius: 1rem;
-    overflow: hidden;
-    margin-top: 1rem;
-}
+
 
 .resume-detail.skills .skill-level {
     display: block;
     height: 100%;
     border-radius: 1rem;
-    background: linear-gradient(90deg, var(--white-color), rgba(255,255,255,0.3));
+    background: linear-gradient(90deg, var(--moon-silver), var(--main-color));
     animation: fillSkill 2s ease-out forwards;
     width: 0%;
 }
 
-.resume-detail.skills .skill-level.html { --skill-width: 90%; }
-.resume-detail.skills .skill-level.css { --skill-width: 85%; }
-.resume-detail.skills .skill-level.cpp { --skill-width: 75%; }
-.resume-detail.skills .skill-level.csharp { --skill-width: 70%; }
+.resume-detail.skills .skill-level.html { --skill-width: 70%; }
+.resume-detail.skills .skill-level.css { --skill-width: 65%; }
+.resume-detail.skills .skill-level.cpp { --skill-width: 50%; }
+.resume-detail.skills .skill-level.csharp { --skill-width: 50%; }
 
 @keyframes fillSkill {
     to { width: var(--skill-width); }
@@ -699,54 +787,30 @@ section.active {
     transition: .3s;
 }
 
+/* About */
 .resume-detail.about .resume-list {
-    height: auto;  /* Membiarkan tinggi daftar tentang sesuai dengan konten */
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));  /* Membuat grid responsif */
+    height: auto;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 }
 
 .resume-detail.about .resume-item {
-    height: auto;  /* Mengatur tinggi item tentang sesuai dengan konten */
-    padding: 0 0 .5rem;  /* Menambahkan padding di bawah item tentang */
-    background: transparent;  /* Membuat latar belakang transparan */
+    height: auto;
+    padding: 0 0 .5rem;
+    background: transparent;
+    border: none;
 }
 
 .resume-detail.about .resume-item p {
-    color: var(--main-color);  /* Mengubah warna teks paragraf menjadi warna utama */
+    color: var(--main-color);
 }
 
 .resume-detail.about .resume-item p span {
-    color: var(--white-color);  /* Mengubah warna teks span menjadi putih */
-    margin-left: 1rem;  /* Memberikan margin kiri pada span */
-    font-size: 1.8rem;  /* Mengatur ukuran font span */
+    color: var(--white-color);
+    margin-left: 1rem;
+    font-size: 1.7rem;
 }
 
-/* Mengubah warna teks menjadi putih, tanpa mempengaruhi gradasi di atasnya */
-.resume .desc {
-    color: white !important;  /* Mengubah warna teks deskripsi menjadi putih tanpa mempengaruhi latar belakang */
-}
-
-/* Mengganti warna teks pada resume section */
-.resume h2, 
-.resume p,  
-.resume button {
-    color: black;  /* Mengubah warna teks pada heading, paragraf, dan tombol menjadi hitam */
-}
-
-/* Mengganti warna ikon pada resume section */
-.resume .resume-item i {
-    color: black;  /* Mengubah warna ikon menjadi hitam */
-}
-
-/* Mengganti warna teks pada tombol */
-.resume .resume-btn {
-    color: black;  /* Mengubah warna teks tombol menjadi hitam */
-}
-
-/* Mengganti warna ikon pada tombol jika diperlukan */
-.resume .resume-btn i {
-    color: black;  /* Mengubah warna ikon tombol menjadi hitam */
-}
-
+/* ===== Portfolio ===== */
 .portfolio-container {
     display: grid;
     grid-template-columns: 55% 45%;
@@ -757,12 +821,12 @@ section.active {
 .portfolio-detail {
     display: none;
     opacity: 0;
-    padding: 3rem;
-    border-radius: 1.5rem;
-    background: rgba(255, 255, 255, .05);
-    border: 1px solid rgba(255, 255, 255, .08);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, .15);
-    transition: opacity .3s ease, transform .3s ease;
+    padding: .5rem 0 .5rem 3rem;
+    background: transparent;
+    border: none;
+    border-left: .2rem solid var(--panel-border);
+    box-shadow: none;
+    transition: opacity .3s ease, transform .3s ease, border-color .4s;
     transform: translateY(20px);
 }
 
@@ -770,32 +834,37 @@ section.active {
     display: block;
     opacity: 1;
     transform: translateY(0);
+    border-left-color: var(--main-color);
 }
 
 .portfolio-box {
-    background: rgba(255, 255, 255, .04);
-    border-radius: 1.5rem;
-    padding: 2rem;
+    background: transparent;
+    border: none;
+    padding: 0;
     min-height: 100%;
 }
 
 .portfolio-box .numb {
+    font-family: "Cormorant Garamond", serif;
     font-size: 7rem;
-    font-weight: 800;
-    -webkit-text-stroke: .07rem var(--white-color);
+    font-weight: 700;
+    -webkit-text-stroke: .06rem var(--main-color);
     color: transparent;
     line-height: 1;
     margin-bottom: 1.5rem;
 }
 
 .portfolio-box h3 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin: .5rem 0 1.5rem;
+    color: var(--white-color);
 }
 
 .portfolio-box p {
     font-size: 1.6rem;
     line-height: 1.8;
+    color: var(--white-color);
+    opacity: .85;
 }
 
 .portfolio-box .tech {
@@ -804,8 +873,12 @@ section.active {
     gap: 1rem 2rem;
     margin: 2rem 0;
     color: var(--main-color);
-    border-bottom: .1rem solid var(--white-color);
+    border-bottom: .1rem solid var(--panel-border);
     padding-bottom: 2rem;
+}
+
+.portfolio-box .tech a {
+    color: var(--moon-silver);
 }
 
 .portfolio-box .live-github {
@@ -821,49 +894,34 @@ section.active {
     justify-content: center;
     gap: .8rem;
     padding: 1rem 1.6rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--white-color);
-    border-radius: .9rem;
-    background: var(--second-bg-color);
-    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: .5rem;
+    background: transparent;
+    border: .1rem solid var(--panel-border);
     transition: .3s ease;
 }
 
 .portfolio-box .live-github a:hover {
     color: var(--main-color);
-    background: rgba(255, 255, 255, .12);
+    border-color: var(--main-color);
 }
 
 .portfolio-box .live-github a:first-child i {
     transform: rotate(135deg);
 }
 
-.portfolio-box .live-github a span {
-    position: static;
-    transform: none;
-    opacity: 1;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-}
-
-.portfolio-box .live-github a:hover span {
-    transform: none;
-    opacity: 1;
-}
-
 .portfolio-box .portfolio-carousel {
     width: 100%;
     height: 45rem;
-    border-radius: 1.5rem;
+    border-radius: .8rem;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, .08);
-    background: rgba(255, 255, 255, .03);
+    border: .1rem solid var(--panel-border);
+    background: rgba(255, 255, 255, .02);
 }
 
 .portfolio-carousel .img-slide {
     display: flex;
-    gap: 0;
     transition: transform .5s ease;
     height: 100%;
 }
@@ -871,6 +929,7 @@ section.active {
 .portfolio-carousel .img-item {
     flex: 0 0 100%;
     height: inherit;
+    position: relative;
 }
 
 .portfolio-carousel .img-item img {
@@ -878,7 +937,16 @@ section.active {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem;
+}
+
+/* Overlay tipis biar warna foto asli nyatu sama tema gelap-emas */
+.portfolio-carousel .img-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(9, 12, 20, .15), rgba(9, 12, 20, .55) 85%);
+    box-shadow: inset 0 0 8rem rgba(9, 12, 20, .5);
+    pointer-events: none;
 }
 
 .portfolio-box .navigation {
@@ -892,144 +960,151 @@ section.active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 5rem;
-    height: 5rem;
+    width: 4.6rem;
+    height: 4.6rem;
     padding: 0;
-    background: var(--second-bg-color);
-    border: .2rem solid var(--main-color);
-    border-radius: .8rem;
-    font-size: 2.4rem;
+    background: transparent;
+    border: .1rem solid var(--main-color);
+    border-radius: .5rem;
+    font-size: 2.2rem;
     color: var(--main-color);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
 .portfolio-box .navigation button.disabled {
-    opacity: 0.5;  /* Membuat tombol lebih transparan saat dinonaktifkan */
-    cursor: not-allowed;  /* Menunjukkan bahwa tombol tidak dapat diklik */
-    border-color: var(--second-bg-color);  /* Mengubah warna border tombol yang dinonaktifkan */
-    color: var(--disable-color);  /* Mengubah warna teks tombol yang dinonaktifkan */
+    opacity: .4;
+    cursor: not-allowed;
+    border-color: var(--panel-border);
+    color: var(--disable-color);
 }
 
 .portfolio-box .navigation button:hover:not(.disabled) {
-    background-color: var(--main-color);  /* Mengubah latar belakang tombol menjadi warna utama saat hover */
-    color: var(--bg-color);  /* Mengubah warna teks tombol menjadi warna latar belakang saat hover */
+    background-color: var(--main-color);
+    color: var(--bg-color);
 }
 
 .portfolio-box .navigation .arrow-right {
-    margin-left: 1.5rem;  /* Memberikan margin kiri pada tombol panah kanan */
+    margin-left: 1.5rem;
 }
 
+/* ===== Contact ===== */
 .contact-container {
-    display: grid;  /* Menggunakan grid untuk menata elemen-elemen di dalam container contact */
-    grid-template-columns: 1fr 1.3fr;  /* Membuat dua kolom dengan kolom pertama lebih kecil */
-    gap: 3rem;  /* Menambahkan jarak antara elemen-elemen di dalam grid */
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
 }
 
 .contact-container .contact-box:first-child {
-    align-self: center;  /* Menyelaraskan elemen pertama secara vertikal di tengah */
+    align-self: center;
 }
 
 .contact-box h2 {
-    font-size: 4.5rem;  /* Ukuran font untuk heading */
+    font-size: 4.2rem;
+    color: var(--white-color);
 }
 
 .contact-box p {
-    font-size: 1.6rem;  /* Ukuran font untuk paragraf di dalam contact box */
+    font-size: 1.6rem;
 }
 
 .contact-box .desc {
-    margin: 1.5rem 0 2.5rem;  /* Margin atas dan bawah untuk deskripsi */
+    margin: 1.5rem 0 2.5rem;
+    color: var(--white-color);
+    opacity: .8;
 }
 
 .contact-box .contact-detail {
-    display: flex;  /* Menggunakan flexbox untuk menata detail kontak */
-    align-items: center;  /* Menyelaraskan elemen secara vertikal di tengah */
-    margin: 2.5rem 0;  /* Memberikan jarak atas dan bawah */
+    display: flex;
+    align-items: center;
+    margin: 2.5rem 0;
 }
 
 .contact-detail i {
-    display: inline-flex;  /* Menampilkan ikon dengan inline-flex */
-    background: var(--second-bg-color);  /* Latar belakang warna kedua */
-    color: var(--main-color);  /* Warna ikon menjadi warna utama */
-    font-size: 3rem;  /* Ukuran font untuk ikon */
-    padding: 1.2rem;  /* Padding di dalam ikon */
-    border-radius: .6rem;  /* Sudut ikon melengkung */
-    margin-right: 1.5rem;  /* Margin kanan untuk memberi jarak antara ikon dan teks */
+    display: inline-flex;
+    background: transparent;
+    border: .1rem solid var(--panel-border);
+    color: var(--main-color);
+    font-size: 2.6rem;
+    padding: 1.2rem;
+    border-radius: .5rem;
+    margin-right: 1.5rem;
 }
 
 .contact-detail .detail p:first-child {
-    color: var(--main-color);  /* Warna teks pertama di dalam detail menjadi warna utama */
+    color: var(--main-color);
+}
+
+.contact-detail .detail p:last-child {
+    color: var(--white-color);
 }
 
 .contact-box form {
-    background: var(--second-bg-color);  /* Latar belakang form */
-    padding: 2.5rem 3.5rem 3.5rem;  /* Padding di dalam form */
-    border-radius: 1rem;  /* Sudut form melengkung */
-    text-align: center;  /* Menyelaraskan teks di tengah */
+    background: transparent;
+    border: none;
+    border-top: .1rem solid var(--panel-border);
+    padding: 3rem 0 0;
+    text-align: center;
 }
 
 .contact-box .heading {
-    font-size: 3.5rem;  /* Ukuran font untuk heading di dalam form */
+    font-size: 3.2rem;
 }
 
 .contact-box .field-box {
-    display: flex;  /* Menggunakan flexbox untuk menata field input */
-    flex-wrap: wrap;  /* Membuat elemen-elemen input menjadi wrap jika diperlukan */
-    gap: 1rem;  /* Jarak antar elemen input */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem 1rem;
 }
 
 .contact-box .field-box input,
 .contact-box .field-box textarea {
-    padding: 1.5rem;  /* Padding dalam elemen input dan textarea */
-    background: var(--bg-color);  /* Latar belakang yang lebih gelap */
-    border: .15rem solid var(--bg-color);  /* Border dengan warna latar belakang */
-    border-radius: 0.5rem;  /* Sudut border lebih melengkung */
-    font-size: 1.2rem;  /* Ukuran font untuk input dan textarea */
-    color: var(--white-color);  /* Warna teks menjadi putih */
-    width: 100%;  /* Lebar input dan textarea 100% */
-    height: 45px;  /* Tinggi input disesuaikan */
+    padding: 1.2rem .3rem;
+    background: transparent;
+    border: none;
+    border-bottom: .1rem solid var(--panel-border);
+    border-radius: 0;
+    font-size: 1.4rem;
+    color: var(--white-color);
+    width: 100%;
+    height: 45px;
+    transition: border-color .3s;
+}
+
+.contact-box .field-box input::placeholder,
+.contact-box .field-box textarea::placeholder {
+    color: rgba(234, 230, 218, .45);
 }
 
 .contact-box .field-box textarea {
-    height: 100px;  /* Tinggi textarea lebih besar */
-    resize: none;  /* Menonaktifkan resizing textarea */
+    height: 100px;
+    resize: none;
 }
 
 .contact-box .btn {
-    margin-top: 2rem;  /* Memberikan jarak atas untuk tombol */
-    cursor: pointer;  /* Menampilkan kursor pointer saat tombol dihover */
+    margin-top: 2rem;
+    cursor: pointer;
 }
 
-/* Fokus pada input dan textarea */
 .contact-box .field-box input:focus,
 .contact-box .field-box textarea:focus {
-    border-color: var(--main-color);  /* Warna border menjadi warna utama saat fokus */
+    border-color: var(--main-color);
 }
-
 
 @media screen and (max-width: 992px) {
-    header {
-        padding: 2rem 4%;  /* Padding pada header untuk memberikan ruang lebih */
-    }
-
-    section {
-        padding: 10rem 4% 2rem;  /* Padding pada section, dengan ruang lebih besar di bagian atas untuk menyesuaikan layout */
-    }
+    header { padding: 2rem 4%; }
+    section { padding: 10rem 4% 2rem; }
+    body::after { width: 9rem; height: 9rem; }
 }
-
 
 @media screen and (max-width: 810px) {
     .contact-box .field-box {
-        grid-template-columns: 1fr;  /* Mengubah kolom input form menjadi satu kolom */
+        grid-template-columns: 1fr;
     }
 }
 
-/* */
 @media screen and (max-width: 768px) {
-    #menu-icon {
-        display: block;
-    }
+    #menu-icon { display: block; }
 
     nav {
         position: absolute;
@@ -1038,15 +1113,13 @@ section.active {
         width: 100%;
         padding: 1rem 0;
         background: var(--bg-color);
-        border-top: .1rem solid rgba(0, 0, 0, 2);
-        box-shadow: 0 .5rem .1rem rgba(0, 0, 0, 2);
+        border-top: .1rem solid var(--panel-border);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .4);
         text-align: center;
         display: none;
     }
 
-    nav.active {
-        display: block;
-    }
+    nav.active { display: block; }
 
     nav a {
         display: block;
@@ -1058,6 +1131,7 @@ section.active {
         justify-content: center;
         gap: 2rem;
     }
+
     .home-img .img-box {
         width: 35rem;
         height: 35rem;
@@ -1069,20 +1143,15 @@ section.active {
         grid-template-columns: 1fr;
     }
 
-    .resume-container {
-        gap: 3rem;
-    }
+    .resume-container { gap: 3rem; }
 
-    .portfolio-container .portfolio-box:first-child {
-        order: 1;
-    }
-    
+    .portfolio-container .portfolio-box:first-child { order: 1; }
+
     @media screen and (max-width: 600px) {
         .home-img .img-box {
             width: 30rem;
             height: 30rem;
         }
-
         .contact-box .field-box {
             grid-template-columns: 1fr;
         }
@@ -1090,9 +1159,7 @@ section.active {
 }
 
 @media screen and (max-width: 450px) {
-    html {
-        font-size: 50%;
-    }
+    html { font-size: 50%; }
 }
 
 @media screen and (max-width: 400px) {
@@ -1103,17 +1170,11 @@ section.active {
     .resume-detail.about .resume-item {
         text-align: center;
     }
-
-    .contact-box form {
-        padding: 2rem 3rem 3.5rem;
-    }
-
-    .contact-box h2 {
-        font-size: 3.5rem;
-    }
+    .contact-box form { padding: 2rem 3rem 3.5rem; }
+    .contact-box h2 { font-size: 3.2rem; }
 }
 
-/* Modal Styles */
+/* ===== Modal ===== */
 .modal {
     display: none;
     position: fixed;
@@ -1122,15 +1183,16 @@ section.active {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, .85);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
     background-color: var(--bg-color);
+    border: .1rem solid var(--panel-border);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: .8rem;
     max-width: 90%;
     max-height: 90%;
     position: relative;
@@ -1147,12 +1209,10 @@ section.active {
 .modal-slide {
     width: 100%;
     display: none;
-    border-radius: 8px;
+    border-radius: .5rem;
 }
 
-.modal-slide.active {
-    display: block;
-}
+.modal-slide.active { display: block; }
 
 .modal-arrow {
     position: absolute;
@@ -1161,23 +1221,18 @@ section.active {
     width: 3.6rem;
     height: 3.6rem;
     border-radius: 50%;
-    border: .2rem solid var(--main-color);
-    background: rgba(0, 0, 0, 0.45);
+    border: .1rem solid var(--main-color);
+    background: rgba(0, 0, 0, .5);
     color: var(--main-color);
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
-.modal-arrow-left {
-    left: .8rem;
-}
-
-.modal-arrow-right {
-    right: .8rem;
-}
+.modal-arrow-left { left: .8rem; }
+.modal-arrow-right { right: .8rem; }
 
 .modal-arrow:hover {
     background: var(--main-color);
@@ -1194,9 +1249,7 @@ section.active {
     cursor: pointer;
 }
 
-.close:hover {
-    color: var(--main-color);
-}
+.close:hover { color: var(--main-color); }
 
 .modal-actions {
     margin-top: 1.6rem;
@@ -1204,7 +1257,7 @@ section.active {
     justify-content: center;
 }
 
-.disabled{
-pointer-events:none;
-opacity:0.5;
+.disabled {
+    pointer-events: none;
+    opacity: .5;
 }
