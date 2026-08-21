@@ -409,6 +409,19 @@
                         <a href="arduino/finger-led.ino" onclick="openModal('finger-led-modal')"><i class='bx bx-download' ></i><span>Download Source</span></a>
                     </div>
                 </div>
+
+                <div class="portfolio-detail">
+                    <p class="numb">10</p>
+                    <h3>Hand Track</h3>
+                    <p>Hand Track dengan beberapa efek pakai python</p>
+                    <div class="tech">
+                        <p>Silahkan download source jika tertarik</p>
+                    </div>
+                    <div class="live-github">
+                        <a href="#" onclick="openModal('hand-track-modal')"><i class='bx bx-images'></i><span>Hasil</span></a>
+                        <a href="python/hand-track.py" download onclick="openModal('hand-track-modal')"><i class='bx bx-download'></i><span>Download Source</span></a>
+                    </div>
+                </div>
             </div>
 
             <div class="portfolio-box">
@@ -440,6 +453,9 @@
                         </div>
                         <div class="img-item">
                             <img src="images/portofolio 9.jpeg">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/portofolio 10.jpeg">
                         </div>
                     </div>
                 </div>
@@ -640,6 +656,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal: Hand Track (Portfolio 10) -->
+    <div id="hand-track-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('hand-track-modal')">&times;</span>
+            <div class="modal-gallery">
+                <button class="modal-arrow modal-arrow-left" onclick="changeModalSlide('hand-track-modal', -1)" aria-label="Previous image">
+                    <i class='bx bx-chevron-left'></i>
+                </button>
+                <img src="images/portofolio 10 v1.jpeg" alt="Hand Track Project" class="modal-slide active">
+                <!-- <img src="images/portofolio 10 v2.jpeg" alt="Hand Track Project 2" class="modal-slide"> -->
+                <button class="modal-arrow modal-arrow-right" onclick="changeModalSlide('hand-track-modal', 1)" aria-label="Next image">
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </div>
+            <div class="modal-actions">
+                <a class="btn modal-download-btn" href="images/portofolio 10 v1.jpeg" download>Download Image</a>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal for Web Developer Project -->
     <div id="web-developer-modal" class="modal">
