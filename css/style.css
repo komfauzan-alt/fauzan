@@ -714,7 +714,7 @@ section.active {
 
 /* Skills */
 .resume-detail.skills .resume-list {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
     height: auto;
     overflow: visible;
 }
@@ -731,10 +731,15 @@ section.active {
     min-height: 14rem;
 }
 
+/* FIX: sebelumnya pake space-between tanpa wrap, jadi badge/teks nabrak
+   ke kolom sebelah kalau judulnya panjang (misal "Arduino / ESP32 (C++)").
+   Sekarang bisa wrap ke baris baru kalau ruangnya sempit. */
 .resume-detail.skills .skill-head {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    row-gap: .8rem;
+    column-gap: 1.4rem;
     margin-bottom: 1.6rem;
 }
 
@@ -742,12 +747,15 @@ section.active {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex: 1 1 auto;
+    min-width: 10rem;
 }
 
 .resume-detail.skills .skill-head i {
     font-size: 4rem;
     margin-right: 1.6rem;
     color: var(--moon-silver);
+    flex-shrink: 0;
 }
 
 .resume-detail.skills .skill-head h3 {
@@ -760,26 +768,20 @@ section.active {
     color: var(--main-color);
     font-size: 1.5rem;
     font-weight: 500;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 
 
-.resume-detail.skills .skill-level {
-    display: block;
-    height: 100%;
-    border-radius: 1rem;
-    background: linear-gradient(90deg, var(--moon-silver), var(--main-color));
-    animation: fillSkill 2s ease-out forwards;
-    width: 0%;
-}
-
-.resume-detail.skills .skill-level.html { --skill-width: 70%; }
-.resume-detail.skills .skill-level.css { --skill-width: 65%; }
-.resume-detail.skills .skill-level.cpp { --skill-width: 50%; }
-.resume-detail.skills .skill-level.csharp { --skill-width: 50%; }
-
-@keyframes fillSkill {
-    to { width: var(--skill-width); }
+/* TAMBAHAN: badge label skill (Menengah/Dasar/Mahir), ganti dari sistem persen sebelumnya */
+.resume-detail.skills .skill-level-badge {
+    padding: .5rem 1.4rem;
+    border: .1rem solid var(--main-color-soft);
+    border-radius: 2rem;
+    font-size: 1.3rem;
+    letter-spacing: .03em;
+    margin-left: auto;
 }
 
 .resume-detail.skills .resume-item:hover i {
@@ -1260,4 +1262,33 @@ section.active {
 .disabled {
     pointer-events: none;
     opacity: .5;
+}
+
+/* ===== TAMBAHAN: feedback status form kontak (sukses/gagal kirim pesan) ===== */
+.contact-box .form-status {
+    margin-top: 1.4rem;
+    font-size: 1.4rem;
+    min-height: 1.8rem;
+}
+
+.contact-box .form-status.success {
+    color: #8fd8a0;
+}
+
+.contact-box .form-status.error {
+    color: #e07a7a;
+}
+
+/* ===== TAMBAHAN: caption carousel (fix bug foto tidak terhubung jelas ke project) ===== */
+.portfolio-box .carousel-caption {
+    margin-top: 1.2rem;
+    font-size: 1.4rem;
+    color: var(--moon-silver);
+    opacity: .85;
+    text-align: right;
+}
+
+.portfolio-box .carousel-caption span {
+    color: var(--main-color);
+    font-weight: 500;
 }

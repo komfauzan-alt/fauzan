@@ -116,6 +116,16 @@ window.onclick = function(event) {
     }
 }
 
+// FIX: modal sekarang bisa ditutup pake tombol ESC, sebelumnya cuma bisa klik X / klik luar
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
+});
+
 function initModalGallery(modalId) {
     modalGalleryIndex[modalId] = 0;
     updateModalSlide(modalId);
@@ -127,6 +137,7 @@ function updateModalSlide(modalId) {
 
     const slides = modal.querySelectorAll('.modal-slide');
     const downloadBtn = modal.querySelector('.modal-download-btn');
+    const arrows = modal.querySelectorAll('.modal-arrow');
     if (!slides.length) return;
 
     let idx = modalGalleryIndex[modalId] || 0;
@@ -140,6 +151,12 @@ function updateModalSlide(modalId) {
     if (downloadBtn && slides[idx]) {
         downloadBtn.setAttribute('href', slides[idx].getAttribute('src'));
     }
+
+    // FIX: kalau cuma ada 1 foto, sembunyiin panah kiri-kanan.
+    // Sebelumnya panah tetap muncul walau geser cuma balik ke foto yang sama.
+    arrows.forEach(arrow => {
+        arrow.style.display = slides.length > 1 ? 'flex' : 'none';
+    });
 }
 
 function changeModalSlide(modalId, step) {
@@ -191,6 +208,7 @@ const images = document.querySelectorAll('.portfolio-carousel .img-item');
 const leftArrow = document.querySelector('.portfolio-box .arrow-left');
 const rightArrow = document.querySelector('.portfolio-box .arrow-right');
 const portfolioDetailsList = document.querySelectorAll('.portfolio-box:first-child .portfolio-detail');
+const carouselCaptionText = document.querySelector('#carouselCaptionText');
 
 // Batas geser = jumlah item terkecil antara detail teks dan gambar carousel
 const maxIndex = Math.min(images.length, portfolioDetailsList.length) - 1;
@@ -208,6 +226,14 @@ function updateCarousel() {
 
     // Update detail portfolio
     updatePortfolioDetail();
+
+    // FIX: update caption biar keliatan jelas foto ini punya project yang mana,
+    // jadi gak ngandelin urutan doang yang gampang geser kalau nambah project baru.
+    if (carouselCaptionText) {
+        const activeDetail = portfolioDetailsList[currentIndex];
+        const title = activeDetail ? activeDetail.querySelector('h3') : null;
+        carouselCaptionText.textContent = title ? title.textContent.trim() : '';
+    }
 }
 
 function updatePortfolioDetail() {
@@ -232,3 +258,45 @@ rightArrow.addEventListener('click', () => {
 
 // Inisialisasi carousel
 updateCarousel();
+
+// ================= Form Kontak ================= //
+// FIX: sebelumnya form submit biasa (reload halaman / redirect ke Formspree),
+// gak ada feedback jelas ke user apakah pesan beneran kekirim atau gagal.
+// Sekarang dikirim via AJAX, hasilnya ditampilin langsung di bawah tombol.
+const contactForm = document.querySelector('#contactForm');
+const formStatus = document.querySelector('#formStatus');
+const contactSubmitBtn = document.querySelector('#contactSubmitBtn');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        contactSubmitBtn.disabled = true;
+        contactSubmitBtn.textContent = 'Mengirim...';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                formStatus.textContent = 'Pesan berhasil dikirim. Makasih udah menghubungi!';
+                formStatus.classList.add('success');
+                contactForm.reset();
+            } else {
+                formStatus.textContent = 'Gagal mengirim pesan. Coba lagi atau hubungi lewat WhatsApp.';
+                formStatus.classList.add('error');
+            }
+        } catch (err) {
+            formStatus.textContent = 'Gagal mengirim pesan. Cek koneksi internet lu, terus coba lagi.';
+            formStatus.classList.add('error');
+        } finally {
+            contactSubmitBtn.disabled = false;
+            contactSubmitBtn.textContent = 'Kirim Pesan';
+        }
+    });
+}
