@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Ngasih tahu bahwa bahasa halaman ini pakai Inggris -->
+<head>
+  <meta charset="UTF-8" /> <!-- Supaya karakter kayak simbol, huruf unik, bisa tampil dengan benar -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Biar tampilan cocok di HP -->
+  <title>User profile</title> <!-- Judul halaman yang muncul di tab browser -->
+
+  <!-- Link ke file CSS buat ngatur tampilan -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Link ke Font Awesome buat nampilin ikon -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- CSS langsung di halaman ini buat tombol 'klik untuk lihat' -->
+  <style>
+    .klik-reveal {
+      color: white;
+      text-decoration: underline; /* Biar kelihatan kayak link */
+      cursor: pointer; /* Jadi kursor berubah tangan pas hover */
+    }
+    .hidden-info {
+      display: none; /* Awalnya disembunyikan */
+      margin-top: 5px;
+      transition: all 0.3s ease; /* Efek transisi lembut */
+    }
+  </style>
+</head>
+<body>
+  <div class="layouts"> <!-- Ini container utama, semua isi halaman ada di sini -->
+
+    <!-- Bagian paling atas, kayak header -->
+    <section class="navbar">
+      <h3>AirLED </h3> <!-- Nama sistem atau project -->
+    </section>
+
+    <!-- Judul Halaman -->
+    <section class="page-title">
+      <h3>THE MAKER</h3> <!-- Judul yang ngasih tahu ini halaman pembuat/project owner -->
+    </section>
+
+    <!-- Bagian isi profil -->
+    <section class="items">
+
+      <!-- Foto dan Nama -->
+      <div class="item user-item">
+        <img src="assets/faceNew.jpg" class="item-image user-image" alt="Foto Profil"> <!-- Foto profil -->
+        <p class="led-location-text">AHMAD FAUZAN YAKFI KHALID</p> <!-- Nama lengkap -->
+        <p class="led-location-text">Born and living in Indonesia 🇮🇩 and 16 years old</p> <!-- Info singkat tentang asal -->
+      </div>
+
+      <!-- Info Email dengan tombol tampil/sembunyi -->
+<div class="item">
+  <p class="led-location-text">📧 E-mail</p>
+  <span 
+    class="klik-reveal" 
+    onclick="reveal('emailInfo', this)"
+    data-show-text="Click to view email"
+    data-hide-text="Click to hide email"
+  >
+    Click to view email
+  </span>
+  <p id="emailInfo" class="hidden-info">your-email@example.com</p>
+</div>
+
+<div class="item">
+  <p class="led-location-text">📞 Cell phone number</p>
+  <span 
+    class="klik-reveal" 
+    onclick="reveal('phoneInfo', this)"
+    data-show-text="Click to see numbers"
+    data-hide-text="Click to hide numbers"
+  >
+    Click to see numbers
+  </span>
+  <p id="phoneInfo" class="hidden-info">+62 8xx-xxxx-xxxx</p>
+</div>
+
+<div class="item">
+  <p class="led-location-text">📌 Feedback</p>
+  <span 
+    class="klik-reveal" 
+    onclick="reveal('feedbackInfo', this)"
+    data-show-text="Click to view feedback"
+    data-hide-text="Click to hide feedback"
+  >
+    Click to view feedback
+  </span>
+  <p id="feedbackInfo" class="hidden-info">
+    <em>"Criticism or feedback about the UI/UX or functionality of this project can be sent to my Gmail or mobile phone number."</em>
+  </p>
+</div>
+
+      <!-- Kutipan atau catatan pribadi -->
+      <div class="item">
+        <p class="led-location-text">📌 Quote</p>
+        <p><em>"Learn from small problems first so you don't get confused by big problems."</em></p>
+      </div>
+    </section>
+
+    <!-- Navigasi bawah halaman -->
+    <section class="bottombar">
+      <ul>
+        <li><a href="/CUYLABS/"><i class="fa-solid fa-house"></i></a></li> <!-- Ke halaman utama -->
+        <li><a href="led.html"><i class="fa-solid fa-lightbulb"></i></a></li> <!-- Ke kontrol LED -->
+        <li><a href="fan.html"><i class="fa-solid fa-fan"></i></a></li> <!-- Ke kontrol kipas -->
+        <li><a href="user.html"><i class="fa-solid fa-user"></i></a></li> <!-- Halaman profil (ini halaman aktif sekarang) -->
+      </ul>
+    </section>
+  </div>
+
+  <!-- Script buat munculin atau sembunyiin email & nomor kalau diklik -->
+<script>
+  function reveal(id, btn) {
+    const el = document.getElementById(id);
+    if (el.style.display === 'block') {
+      el.style.display = 'none';
+      btn.textContent = btn.getAttribute('data-show-text');
+    } else {
+      el.style.display = 'block';
+      btn.textContent = btn.getAttribute('data-hide-text');
+    }
+  }
+</script>
+</body>
+</html>

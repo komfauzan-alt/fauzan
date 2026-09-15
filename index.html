@@ -99,7 +99,7 @@
              <i class='bx bxs-palette'></i>
           </div>
           <h3>Graphic Design</h3>
-          <p>Saya menciptakan tampilan visual yang sesuai dengan identitas dan tujuan brand Anda..</p>
+          <p>Saya menciptakan tampilan visual yang sesuai dengan identitas dan tujuan brand Anda.</p>
        </div>
 
        <div class="services-box">
@@ -176,13 +176,13 @@
 
                 <div class="resume-detail skills">
                     <h2 class="heading">Skill <span>Saya</span></h2>
-                    <p class="desc">Ini kemampuan yang lagi aktif gua pelajari dan pake buat ngerjain project-project di atas. Persentase di bawah ini estimasi kasar, bukan ukuran pasti.</p>
+                    <p class="desc">Ini kemampuan yang lagi aktif gua pelajari dan pake buat ngerjain project-project di atas. Level di bawah ini estimasi kasar, bukan ukuran pasti — sesuaikan sendiri kalau lo ngerasa levelnya beda.</p>
                     <div class="resume-list">
                         <div class="resume-item">
                             <div class="skill-head">
                                 <i class='bx bxl-html5'></i>
                                 <div><h3>HTML</h3></div>
-                                <span class="skill-level-badge">Menengah</span>
+                                <span class="skill-level-badge">Mahir</span>
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@
                             <div class="skill-head">
                                 <i class='bx bxl-css3'></i>
                                 <div><h3>CSS</h3></div>
-                                <span class="skill-level-badge">Menengah</span>
+                                <span class="skill-level-badge">Mahir</span>
                             </div>
                         </div>
 
@@ -261,7 +261,7 @@
                     </div>
 
                     <div class="resume-item">
-                        <p>Bahasa <span>Indonesia, Inggris(menengah)</span></p>
+                        <p>Bahasa <span>Indonesia, Inggris (menengah)</span></p>
                     </div>
                 </div>
                 </div>
@@ -277,19 +277,12 @@
                 <div class="portfolio-detail active">
                     <p class="numb">01</p>
                     <h3>AirLED / LED CONTROL</h3>
-                    <p>Sejumlah lampu led kecil yang di atur lewat web server (via WiFi) </p>
-                    <div class="tech">
-                        <p>Software yang digunakan:</p>
-                        <p>Arduino IDE</p>
-                        <p>Visual Studio Code</p>
-                        <p>Bahan-bahan:</p>
-                        <p>esp32 X1</p>
-                        <p>breadboard X1</p>
-                        <p>kabel jumper M/F X6</p>
-                        <p>lampu led 5MM  X4</p>
-                        <p>resistor X4</p>
-                        <p></p>
-                    </div>
+                    <p>Kontrol lampu LED jarak jauh lewat WiFi tanpa perlu ke saklar manual — cocok buat otomatisasi rumah kecil.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan & Software</summary>
+                        <p>Software: Arduino IDE, Visual Studio Code</p>
+                        <p>Bahan: ESP32 x1, breadboard x1, kabel jumper M/F x6, LED 5mm x4, resistor x4</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('airled-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/airled-led-control.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -300,19 +293,11 @@
                 <div class="portfolio-detail ">
                     <p class="numb">02</p>
                     <h3>LuminoAlert / Cahaya Peringatan</h3>
-                    <p>Sekumpulan dari komponen kecil yang berfungsi mengeluarkan cahaya dan suara, Jika cahaya lux kurang dari apa yang ada di coding</p>
-                    <p></p>
-                    <p>maka cahaya dan suara akan keluar. tapi jika tidak, artinya sebaliknya.</p>
-                    <div class="tech">
-                        <p>Bahan-bahan:</p>
-                        <p>LDR sensor X1</p>
-                        <p>passive buzzer module 2kaki X1</p>
-                        <p>Arduino uno r3 X1</p>
-                        <p>breadboard X1</p>
-                        <p>LED 5mm X1</p>
-                        <p>resistor X1</p>
-                        <p>kabel jumper M/M  X14</p>
-                    </div>
+                    <p>Alarm otomatis yang nyalain cahaya dan suara begitu ruangan gelap — solusi simpel buat deteksi kondisi minim cahaya.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan</summary>
+                        <p>LDR sensor x1, passive buzzer module 2 kaki x1, Arduino Uno R3 x1, breadboard x1, LED 5mm x1, resistor x1, kabel jumper M/M x14</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('luminoalert-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/luminoalert.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -322,7 +307,7 @@
                 <div class="portfolio-detail">
                     <p class="numb">03</p>
                     <h3>Hasil Proyek Pembuatan Web SMP</h3>
-                    <p>untuk lebih lengkapnya klik link di bawah ini</p>
+                    <p>Website sekolah lengkap yang dibangun dari nol buat SMP PGRI 1 Tangerang.</p>
                     <div class="tech">
                         <p><a href="https://smp-pgri-1-tgr.vercel.app/" target="_blank" rel="noopener noreferrer">https://smp-pgri-1-tgr.vercel.app/</a></p>
                     </div>
@@ -335,16 +320,12 @@
                 <div class="portfolio-detail">
                     <p class="numb">04</p>
                     <h3>Dua Mata Pada Layar OLED</h3>
-                    <p>Barisan code yang menampilkan dua mata pada layar OLED</p>
-                    <div class="tech">
-                        <p>Library yang digunakan:</p>
-                        <p>Adafruit SSD1306</p>
-                        <p>Adafruit GFX</p>
-                        <p>Bahan-bahan:</p>
-                        <p>OLED 0.96</p>
-                        <p>ESP32 Dev Kit V1</p>
-                        <p>Kabel jumper M/F X4</p>
-                    </div>
+                    <p>Animasi sepasang mata yang bikin layar OLED kecil terasa hidup — eksperimen tampilan interaktif buat proyek robotik.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan</summary>
+                        <p>Library: Adafruit SSD1306, Adafruit GFX</p>
+                        <p>Bahan: OLED 0.96", ESP32 Dev Kit V1, kabel jumper M/F x4</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('oled-eyes-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/oled-eyes.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -354,17 +335,11 @@
                 <div class="portfolio-detail">
                     <p class="numb">05</p>
                     <h3>Suara Lampu</h3>
-                    <p>Kontrol lampu menggunakan sensor suara (Tepuk Tangan) untuk nyalakan/matikan secara otomatis.</p>
-                    <div class="tech">
-                        <p>Bahan-bahan:</p>
-                        <p>Arduino UNO</p>
-                        <p>Sensor suara</p>
-                        <p>Relay</p>
-                        <p>Kabel jumper</p>
-                        <p>Breadboard</p>
-                        <p>lampu</p>
-                        <p>Kabel arduino</p>
-                    </div>
+                    <p>Nyalain/matiin lampu cuma pakai tepuk tangan — otomasi rumah tanpa perlu sentuh saklar.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan</summary>
+                        <p>Arduino Uno, sensor suara, relay, kabel jumper, breadboard, lampu, kabel arduino</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('suara-lampu-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/suara-lampu.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -374,16 +349,12 @@
                 <div class="portfolio-detail">
                     <p class="numb">06</p>
                     <h3>Demo Animasi & Grafis OLED</h3>
-                    <p>Contoh animasi dan grafik pada layar OLED SSD1306 dengan beragam teks dan gambar.</p>
-                    <div class="tech">
-                        <p>Library yang digunakan:</p>
-                        <p>Adafruit SSD1306</p>
-                        <p>Adafruit GFX</p>
-                        <p>Bahan-bahan:</p>
-                        <p>OLED 0.96</p>
-                        <p>ESP32 Dev Kit V1</p>
-                        <p>Kabel jumper M/F X4</p>
-                    </div>
+                    <p>Kumpulan animasi dan grafik teks di layar OLED SSD1306, buat referensi tampilan proyek elektronik.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan</summary>
+                        <p>Library: Adafruit SSD1306, Adafruit GFX</p>
+                        <p>Bahan: OLED 0.96", ESP32 Dev Kit V1, kabel jumper M/F x4</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('ssd1306-demo-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/ssd1306-demo.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -392,16 +363,11 @@
                 <div class="portfolio-detail">
                     <p class="numb">07</p>
                     <h3>Menyalakan & Mematikan Lampu</h3>
-                    <p>Mengontrol lampu menggunakan aplikasi telegram</p>
-                    <div class="tech">
-                        <p>Bahan-bahan:</p>
-                        <p>ESP32</p>
-                        <p>Relay 5v 2channel</p>
-                        <p>Kabel jumper M/F x4</p>
-                        <p>Breadboard</p>
-                        <p>lampu x2</p>
-                        <p>Rumah lampu x2</p>
-                    </div>
+                    <p>Kendaliin lampu rumah dari mana aja lewat aplikasi Telegram di HP.</p>
+                    <details class="tech">
+                        <summary>Detail Bahan</summary>
+                        <p>ESP32, relay 5v 2 channel, kabel jumper M/F x4, breadboard, lampu x2, rumah lampu x2</p>
+                    </details>
                     <div class="live-github">
                         <a href="#" onclick="openModal('lampu-telegram-modal')"><i class='bx bx-images' ></i><span>Lihat & Download</span></a>
                         <a href="arduino/LampuTele.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -411,10 +377,7 @@
                 <div class="portfolio-detail">
                     <p class="numb">08</p>
                     <h3>Kamera Python</h3>
-                    <p>Program mengambil foto dengan cara berkedip</p>
-                    <div class="tech">
-                        <!-- Belum ada source/bahan yang bisa dipamerkan. Isi section ini kalau sudah ada. -->
-                    </div>
+                    <p>Program yang otomatis ambil foto begitu mendeteksi kedipan mata.</p>
                     <div class="live-github">
                         <a href="#" onclick="openModal('port08-modal')"><i class='bx bx-images' ></i><span>Cara Membuatnya</span></a>
                     </div>
@@ -423,10 +386,7 @@
                 <div class="portfolio-detail">
                     <p class="numb">09</p>
                     <h3>Jari - Led </h3>
-                    <p>Mengatur on off led dengan jari (1 atau 2)</p>
-                    <div class="tech">
-                        <p>Silahkan download source jika tertarik</p>
-                    </div>
+                    <p>Nyala-matiin LED cuma pakai gerakan jari (1 atau 2 jari) tanpa sentuh saklar.</p>
                     <div class="live-github">
                         <a href="#" onclick="openModal('finger-led-modal')"><i class='bx bx-images' ></i><span>Hasil</span></a>
                         <a href="arduino/finger-led.ino" download><i class='bx bx-download' ></i><span>Download Source</span></a>
@@ -436,15 +396,27 @@
                 <div class="portfolio-detail">
                     <p class="numb">10</p>
                     <h3>Hand Track</h3>
-                    <p>Hand Track dengan beberapa efek pakai python</p>
-                    <div class="tech">
-                        <p>Silahkan download source jika tertarik</p>
-                    </div>
+                    <p>Deteksi gerakan tangan real-time pakai Python, lengkap dengan beberapa efek visual.</p>
                     <div class="live-github">
                         <a href="#" onclick="openModal('hand-track-modal')"><i class='bx bx-images'></i><span>Comment & hasilnya</span></a>
                         <a href="arduino/python-handtrack-main.zip" download><i class='bx bx-download'></i><span>Download Source</span></a>
                     </div>
                 </div>
+
+                <!-- Project 11 (Hand Track: Web Shooter) masih WIP — foto carousel-nya masih placeholder (wip.png).
+                     Sengaja disembunyikan dari daftar biar gak ada yang nemu project setengah jadi.
+                     Buka lagi kalau udah ada hasil final + foto beneran. -->
+                <!--
+                <div class="portfolio-detail">
+                    <p class="numb">11</p>
+                    <h3>Hand Track: Web Shooter</h3>
+                    <p>Hand Track jaring dengan gaya yang di pakai spiderman</p>
+                    <div class="live-github">
+                        <a href="#" onclick="openModal('hand-track-modal-spiderman')"><i class='bx bx-images'></i><span>Comment & hasilnya</span></a>
+                        <a href="arduino/spiderman.zip" download><i class='bx bx-download'></i><span>Download Source</span></a>
+                    </div>
+                </div>
+                -->
             </div>
 
             <div class="portfolio-box">
@@ -518,7 +490,7 @@
                 <div class="contact-detail">
                     <i class='bx bxs-map' ></i>
                     <div class="detail">
-                        <p>ALamat</p>
+                        <p>Alamat</p>
                         <p>Kota Tangerang, Indonesia</p>
                     </div>
                 </div>
@@ -562,7 +534,7 @@
         </div>
     </div>
 
-    <!-- Modal: LuminoAlert (Portfolio 02) — sebelumnya 2 slide tapi src-nya sama (duplikat), sekarang cuma 1 sampai ada foto kedua yang beneran -->
+    <!-- Modal: LuminoAlert (Portfolio 02) -->
     <div id="luminoalert-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('luminoalert-modal')">&times;</span>
@@ -571,7 +543,6 @@
                     <i class='bx bx-chevron-left'></i>
                 </button>
                 <img src="arduino/schematics/luminoalert-schematic.png" alt="LuminoAlert schematic" class="modal-slide active">
-                <!-- Tambahin <img> lagi di sini kalau udah ada foto kedua yang beda -->
                 <button class="modal-arrow modal-arrow-right" onclick="changeModalSlide('luminoalert-modal', 1)" aria-label="Next image">
                     <i class='bx bx-chevron-right'></i>
                 </button>
@@ -582,7 +553,7 @@
         </div>
     </div>
 
-    <!-- Modal: OLED Eyes (Portfolio 04) — sama, dulu duplikat, sekarang 1 slide -->
+    <!-- Modal: OLED Eyes (Portfolio 04) -->
     <div id="oled-eyes-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('oled-eyes-modal')">&times;</span>
@@ -591,7 +562,6 @@
                     <i class='bx bx-chevron-left'></i>
                 </button>
                 <img src="arduino/schematics/oled-eyes-schematic.png" alt="OLED eyes schematic" class="modal-slide active">
-                <!-- Tambahin <img> lagi di sini kalau udah ada foto kedua yang beda -->
                 <button class="modal-arrow modal-arrow-right" onclick="changeModalSlide('oled-eyes-modal', 1)" aria-label="Next image">
                     <i class='bx bx-chevron-right'></i>
                 </button>
@@ -622,7 +592,7 @@
         </div>
     </div>
 
-    <!-- Modal: SSD1306 Demo (Portfolio 06) — sebelumnya duplikat, sekarang 1 slide -->
+    <!-- Modal: SSD1306 Demo (Portfolio 06) -->
     <div id="ssd1306-demo-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('ssd1306-demo-modal')">&times;</span>
@@ -631,7 +601,6 @@
                     <i class='bx bx-chevron-left'></i>
                 </button>
                 <img src="arduino/schematics/ssd1306-demo-schematic.png" alt="SSD1306 demo schematic" class="modal-slide active">
-                <!-- Tambahin <img> lagi di sini kalau udah ada foto kedua yang beda -->
                 <button class="modal-arrow modal-arrow-right" onclick="changeModalSlide('ssd1306-demo-modal', 1)" aria-label="Next image">
                     <i class='bx bx-chevron-right'></i>
                 </button>
@@ -703,6 +672,26 @@
         </div>
     </div>
 
+    <!-- Modal: Hand Track: spiderman — nonaktif dulu selama project 11 disembunyikan, ID-nya tetap disimpan biar gampang diaktifkan lagi -->
+    <!--
+    <div id="hand-track-modal-spiderman" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('hand-track-modal-spiderman')">&times;</span>
+            <div class="modal-gallery">
+                <button class="modal-arrow modal-arrow-left" onclick="changeModalSlide('hand-track-modal-spiderman', -1)" aria-label="Previous image">
+                    <i class='bx bx-chevron-left'></i>
+                </button>
+                <img src="images/portofolio-11.jpeg" alt="Hand Track Project" class="modal-slide active">
+                <button class="modal-arrow modal-arrow-right" onclick="changeModalSlide('hand-track-modal-spiderman', 1)" aria-label="Next image">
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </div>
+            <div class="modal-actions">
+                <a class="btn modal-download-btn" href="images/portofolio-11.jpeg" download>Download Image</a>
+            </div>
+        </div>
+    </div>
+    -->
 
     <!-- Modal for Web Developer Project -->
     <div id="web-developer-modal" class="modal">

@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+/* Ngambil font dari Google Fonts, namanya Titillium Web */
+
+*,
+html {
+    margin: 0;                      /* Hilangin jarak luar semua elemen */
+    padding: 0;                     /* Hilangin jarak dalam juga */
+    box-sizing: border-box;        /* Biar ukuran elemen lebih gampang dihitung */
+    cursor: url("assets/cursor.png"), auto; /* Ganti kursor default jadi custom image */
+    font-family: 'Nunito', sans-serif; /* Semua teks pakai font ini */
+}
+
+body {
+    background-color: #f5f7fa;     /* Warna latar belakang abu terang */
+    color: #fff;                   /* Warna teks putih */
+}
+
+.layouts {
+    max-width: 476px;              /* Lebar maksimal kontainer */
+    margin: 0 auto;                /* Kontainernya ditaruh di tengah */
+    min-height: 100vh;             /* Tinggi minimal seukuran 1 layar penuh */
+    border: 1px solid #ddd;        /* Border tipis abu */
+    border-radius: 12px;           /* Sudut dibuletin */
+    overflow: hidden;              /* Supaya isi ga keluar kontainer */
+    position: relative;            /* Dipakai buat layer di belakang */
+    background-image: url("assets/bgWebLed.jpg"); /* Background gambar */
+    background-size: cover;        /* Gambar nge-cover seluruh area */
+    background-position: center;   /* Posisi gambar di tengah */
+    background-repeat: no-repeat;  /* Gambar nggak diulang */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+}
+
+/* 🔲 Lapis blur gelap di belakang konten */
+.layouts::before {
+    content: '';                             /* Bikin elemen kosong */
+    position: absolute;                      /* Ditempel ke parent */
+    inset: 0;                                /* Nutup semua sisi */
+    background-color: rgba(0, 0, 0, 0.3);    /* Warna hitam transparan */
+    backdrop-filter: blur(6px);             /* Efek blur */
+    -webkit-backdrop-filter: blur(6px);     /* Blur untuk Safari */
+    z-index: 0;                              /* Lapisan paling belakang */
+}
+
+/* Semua konten di atas blur */
+.layouts > * {
+    position: relative;
+    z-index: 1;                             /* Supaya tampil di atas lapisan blur */
+}
+
+/* 🔝 Navigasi atas */
+.navbar {
+    background-color: rgba(30, 30, 30, 0.4); /* Warna gelap transparan */
+    padding: 16px;
+    text-align: center;                     /* Teks di tengah */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);/* Bayangan bawah halus */
+    backdrop-filter: blur(8px);             /* Blur di background */
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Garis bawah tipis */
+}
+
+.navbar h3 {
+    color: white;
+    font-weight: 900;        /* Tebal banget */
+    font-size: 20px;
+}
+
+/* 🔲 Container semua item */
+.items {
+    display: flex;
+    flex-direction: column; /* Item ditumpuk ke bawah */
+    padding: 24px;
+    gap: 16px;               /* Jarak antar item */
+}
+
+/* ✅ Kotak item atau kotak led */
+.item, .led {
+    background-color: rgba(255, 255, 255, 0.08); /* Putih transparan */
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);    /* Bayangan lembut */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s ease-in-out;      /* Hover animasi halus */
+    backdrop-filter: blur(10px);                 /* Blur belakang */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);   /* Garis putih samar */
+}
+
+/* Hover item */
+.item:hover,
+.led:hover {
+    transform: translateY(-4px); /* Naik dikit pas hover */
+}
+
+/* Gambar di dalam item */
+.item-image {
+    width: 60%;
+    border-radius: 20px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.item:hover .item-image {
+    transform: scale(1.1);
+}
+
+/* ✅ Tombol submit */
+.item-submit,
+.led-submit {
+    background-color: rgba(80, 80, 80, 0.6);  /* Warna abu gelap transparan */
+    padding: 10px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover smooth */
+}
+
+/* Hover tombol */
+.item-submit:hover,
+.led-submit:hover {
+    background-color: rgba(200, 200, 200, 0.15); /* Makin terang dikit pas hover */
+    transform: translateY(-2px);                /* Naik dikit */
+}
+
+/* 🔠 Judul halaman */
+.page-title {
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.page-title h3 {
+    font-weight: 800;
+    font-size: 24px;
+    text-align: center;
+    color: #f1f1f1;
+}
+
+/* 🟩 Grid untuk list LED */
+.leds {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+    gap: 16px;
+    padding: 16px;
+}
+
+/* Gambar LED */
+.led-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(20, 20, 20, 0.6); /* Garis abu gelap */
+}
+
+/* Teks lokasi LED */
+.led-location-text {
+    font-weight: 700;
+    font-size: 14px;
+    color: #ddd; /* Abu muda */
+}
+
+/* 🧭 Navigasi bawah */
+.bottombar {
+    background-color: rgba(30, 30, 30, 0.4); 
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Garis atas */
+    padding: 8px 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.bottombar ul {
+    display: flex;
+    justify-content: space-around;  /* Rata kiri-kanan */
+    list-style-type: none;          /* Hilangin bullet */
+    margin: 0;
+    padding: 0;
+}
+
+.bottombar ul li a {
+    color: #f1f1f1;                 /* Teks abu terang */
+    text-decoration: none;         /* Tanpa garis bawah */
+    font-size: 20px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.bottombar ul li a:hover {
+    transform: scale(1.15);        /* Dibesar dikit pas hover */
+}
+
+/* ================== MEDIA QUERY LAPTOP / LANDSCAPE ================== */
+@media (min-width: 768px) {
+    .layouts {
+        max-width: 1024px; /* Lebih lebar di laptop */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .items {
+        flex-direction: row; /* Bikin item sejajar ke samping */
+        flex-wrap: wrap;     /* Kalau kepanjangan, turun ke bawah */
+        justify-content: space-between;
+        gap: 24px;
+        padding: 24px; /* Tambah padding supaya enak */
+    }
+
+    .item {
+        width: calc(50% - 12px); /* Dua item per baris dengan jarak */
+    }
+
+    .leds {
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom LED di laptop */
+        padding: 24px;
+    }
+
+    .navbar h3,
+    .page-title h3 {
+        font-size: 28px;
+    }
+
+    .item-submit,
+    .led-submit {
+        font-size: 18px;
+    }
+
+    .bottombar ul li a {
+        font-size: 22px;
+    }
+}

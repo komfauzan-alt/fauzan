@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Ini buat ngasih tahu browser kalau isi file ini pake bahasa Inggris -->
+<head>
+    <meta charset="UTF-8"> <!-- Biar karakter kayak huruf-huruf aneh bisa ditampilin dengan benar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Supaya tampilan responsive di HP -->
+    <title>Document</title> <!-- Judul yang muncul di tab browser -->
+    
+    <!-- Ini buat hubungkan ke file CSS kita sendiri -->
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Ini link ke Font Awesome, buat nampilin ikon-ikon seperti rumah, kipas, lampu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="layouts"> <!-- Ini container utama yang ngebungkus semua isi halaman -->
+    
+        <!-- Bagian navbar atau judul di atas -->
+        <section class="navbar">
+            <h3>AirLED</h3> <!-- Judul atau nama aplikasi -->
+        </section>
+
+        <!-- Bagian isi utama, tempat tombol-tombol untuk kontrol -->
+        <section class="items">
+            <!-- Item pertama: kontrol LED -->
+            <div class="item">
+                <img src="assets/led-on-red.png" class="item-image"/> <!-- Gambar LED -->
+                <button class="item-submit" onclick="location.href = 'led.html'">LED CONTROL</button>
+                <!-- Kalau tombol ini diklik, langsung diarahkan ke halaman led.html -->
+            </div>
+
+            <!-- Item kedua: kontrol kipas -->
+            <div class="item">
+                <img src="assets/fan.png" class="item-image"/> <!-- Gambar kipas -->
+                <button class="item-submit" onclick="location.href = 'fan.html'">FAN CONTROL</button>
+                <!-- Kalau diklik, buka halaman fan.html -->
+            </div>
+
+            <!-- Item ketiga: belum selesai, masih coming soon -->
+            <div class="item">
+                <img src="assets/wip.png" class="item-image"/> <!-- Gambar "Work in Progress" -->
+                <button class="item-submit">ON GOING</button>
+                <!-- Tombol ini belum bisa diklik kemana-mana -->
+            </div>
+        </section>
+
+        <!-- Bagian bawah kayak menu navigasi, semacam shortcut -->
+        <section class="bottombar">
+            <ul>
+                <li>
+                    <a href="/CUYLABS/"><i class="fa-solid fa-house"></i></a> <!-- Ikon rumah, balik ke home -->
+                </li>
+                <li>
+                    <a href="led.html"><i class="fa-solid fa-lightbulb"></i></a> <!-- Ikon lampu, ke halaman LED -->
+                </li>
+                <li>
+                    <a href="fan.html"><i class="fa-solid fa-fan"></i></a> <!-- Ikon kipas, ke halaman kipas -->
+                </li>
+                <li>
+                    <a href="user.html"><i class="fa-solid fa-user"></i></a> <!-- Ikon user, ke halaman user -->
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Ini buat manggil file JavaScript eksternal, misalnya buat efek tombol -->
+    <script src="main.js"></script>
+</body>
+</html>

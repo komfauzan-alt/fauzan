@@ -1292,3 +1292,43 @@ section.active {
     color: var(--main-color);
     font-weight: 500;
 }
+
+/* Fix tampilan <details> buat bagian tech, biar nyambung sama tema */
+.portfolio-box details.tech {
+    display: block;
+    cursor: pointer;
+}
+
+.portfolio-box details.tech summary {
+    list-style: none;
+    color: var(--main-color);
+    font-size: 1.5rem;
+    letter-spacing: .03em;
+    padding-bottom: 1rem;
+    border-bottom: .1rem solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.portfolio-box details.tech summary::-webkit-details-marker {
+    display: none;
+}
+
+.portfolio-box details.tech summary::before {
+    content: '▸';
+    color: var(--main-color);
+    transition: transform .3s ease;
+}
+
+.portfolio-box details.tech[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.portfolio-box details.tech p {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: var(--white-color);
+    opacity: .8;
+    line-height: 1.7;
+}

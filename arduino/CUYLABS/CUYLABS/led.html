@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Ngasih tahu kalau bahasa utama halaman ini adalah bahasa Inggris -->
+<head>
+    <meta charset="UTF-8" /> <!-- Supaya semua karakter, termasuk simbol dan huruf spesial, bisa ditampilkan dengan benar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Biar tampilannya enak dilihat di HP juga -->
+    <title>LED Control</title> <!-- Judul yang bakal muncul di tab browser -->
+
+    <!-- Hubungkan ke file CSS sendiri, isinya tampilan/layout -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Link ke Font Awesome, buat nampilin ikon kayak rumah, lampu, kipas -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+  <div class="layouts"> <!-- Container utama, semua isi halaman ditampung di sini -->
+
+    <!-- Bagian atas halaman, tempat judul aplikasi -->
+    <section class="navbar">
+      <h3>AirLED </h3> <!-- Nama aplikasi, bisa diganti kalau perlu -->
+    </section>
+
+    <!-- Judul halaman atau sub-judul -->
+    <section class="page-title">
+      <h3>LED CONTROL</h3> <!-- Menunjukkan bahwa ini halaman kontrol lampu -->
+    </section>
+
+    <!-- Bagian kontrol LED -->
+    <section class="leds">
+
+      <!-- Kontrol LED untuk Dapur -->
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="dapurLedImage" /> <!-- Gambar kondisi lampu dapur -->
+        <p class="led-location-text">DAPUR</p> <!-- Nama ruangannya -->
+        <button class="led-submit" id="ledDapur" onclick="setDapurLed()">TURN ON</button> <!-- Tombol nyalakan/matikan -->
+      </div>
+
+      <!-- Kontrol LED untuk Ruang Tamu -->
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="tamuLedImage" />
+        <p class="led-location-text">RUANG TAMU</p>
+        <button class="led-submit" id="ledTamu" onclick="setTamuLed()">TURN ON</button>
+      </div>
+
+      <!-- Kontrol LED untuk Ruang Makan -->
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="makanLedImage" />
+        <p class="led-location-text">RUANG MAKAN</p>
+        <button class="led-submit" id="ledMakan" onclick="setMakanLed()">TURN ON</button>
+      </div>
+
+      <!-- Kontrol LED untuk Toilet -->
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="toiletLedImage" />
+        <p class="led-location-text">TOILET</p>
+        <button class="led-submit" id="ledToilet" onclick="setToiletLed()">TURN ON</button>
+      </div>
+
+      <!-- Slot tambahan, mungkin buat LED lain tapi belum ditentukan -->
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="" />
+        <p class="led-location-text">-</p>
+        <p>TURN ON</p>
+      </div>
+      <div class="led">
+        <img src="assets/led-off.png" class="led-image" id="" />
+        <p class="led-location-text">-</p>
+        <p>TURN ON</p>
+      </div>
+
+      <!-- Tombol untuk nyalakan dan matikan semua lampu sekaligus -->
+      <div style="grid-column: span 2; display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+        <button class="led-submit" onclick="turnAllOn()">TURN IT ALL ON</button> <!-- Nyalakan semua lampu -->
+        <button class="led-submit" onclick="turnAllOff()">TURN EVERYTHING OFF</button> <!-- Matikan semua lampu -->
+      </div>
+    </section>
+
+    <!-- Menu bawah, semacam shortcut ke halaman lain -->
+    <section class="bottombar">
+      <ul>
+        <li><a href="/CUYLABS/"><i class="fa-solid fa-house"></i></a></li> <!-- Halaman utama -->
+        <li><a href="led.html"><i class="fa-solid fa-lightbulb"></i></a></li> <!-- Halaman LED -->
+        <li><a href="fan.html"><i class="fa-solid fa-fan"></i></a></li> <!-- Halaman kipas -->
+        <li><a href="user.html"><i class="fa-solid fa-user"></i></a></li> <!-- Halaman user/profile -->
+      </ul>
+    </section>
+  </div>
+
+  <!-- File JavaScript yang berisi logika saat tombol diklik -->
+  <script src="main.js"></script>
+</body>
+</html>
+
+
