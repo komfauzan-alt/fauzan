@@ -820,6 +820,48 @@ section.active {
     align-items: start;
 }
 
+.portfolio-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.portfolio-filter .filter-btn {
+    padding: .9rem 2rem;
+    background: transparent;
+    border: .1rem solid var(--panel-border);
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    letter-spacing: .03em;
+    color: var(--white-color);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.portfolio-filter .filter-btn:hover {
+    border-color: var(--main-color-soft);
+}
+
+.portfolio-filter .filter-btn.active {
+    border-color: var(--main-color);
+    color: var(--main-color);
+    background: rgba(216, 196, 143, .08);
+}
+
+.project-badge {
+    display: inline-block;
+    padding: .4rem 1.2rem;
+    margin-bottom: 1rem;
+    border: .1rem solid var(--main-color);
+    border-radius: 3rem;
+    font-size: 1.2rem;
+    letter-spacing: .05em;
+    color: var(--main-color);
+    text-transform: uppercase;
+}
+
 .portfolio-detail {
     display: none;
     opacity: 0;

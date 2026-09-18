@@ -220,9 +220,11 @@ function updateCarousel() {
     // Geser carousel
     carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    // Toggle tombol disabled
-    leftArrow.classList.toggle('disabled', currentIndex === 0);
-    rightArrow.classList.toggle('disabled', currentIndex === maxIndex);
+    // Toggle tombol disabled (mempertimbangkan filter kategori yang lagi aktif)
+    const hasPrevVisible = Array.from({ length: currentIndex }, (_, i) => i).some(matchesFilter);
+    const hasNextVisible = Array.from({ length: maxIndex - currentIndex }, (_, i) => currentIndex + 1 + i).some(matchesFilter);
+    leftArrow.classList.toggle('disabled', !hasPrevVisible);
+    rightArrow.classList.toggle('disabled', !hasNextVisible);
 
     // Update detail portfolio
     updatePortfolioDetail();
@@ -245,15 +247,53 @@ function updatePortfolioDetail() {
 // Event listener tombol kiri
 leftArrow.addEventListener('click', () => {
     if (leftArrow.classList.contains('disabled')) return;
-    currentIndex = Math.max(0, currentIndex - 1);
+    for (let i = currentIndex - 1; i >= 0; i--) {
+        if (matchesFilter(i)) { currentIndex = i; break; }
+    }
     updateCarousel();
 });
 
 // Event listener tombol kanan
 rightArrow.addEventListener('click', () => {
     if (rightArrow.classList.contains('disabled')) return;
-    currentIndex = Math.min(maxIndex, currentIndex + 1);
+    for (let i = currentIndex + 1; i <= maxIndex; i++) {
+        if (matchesFilter(i)) { currentIndex = i; break; }
+    }
     updateCarousel();
+});
+
+// ================= Filter Kategori Proyek ================= //
+// FIX: sebelumnya 11 proyek numpuk rata tanpa kategori, susah nyari yang relevan.
+// Sekarang bisa difilter per kategori (Web/IoT/Python) biar gak usah geser satu-satu.
+let currentFilter = 'all';
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+function categoryOf(index) {
+    const detail = portfolioDetailsList[index];
+    return detail ? detail.dataset.category : null;
+}
+
+function matchesFilter(index) {
+    return currentFilter === 'all' || categoryOf(index) === currentFilter;
+}
+
+function findNearestVisible(fromIndex) {
+    if (matchesFilter(fromIndex)) return fromIndex;
+    for (let step = 1; step <= maxIndex; step++) {
+        if (fromIndex + step <= maxIndex && matchesFilter(fromIndex + step)) return fromIndex + step;
+        if (fromIndex - step >= 0 && matchesFilter(fromIndex - step)) return fromIndex - step;
+    }
+    return fromIndex;
+}
+
+filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        currentIndex = findNearestVisible(currentIndex);
+        updateCarousel();
+    });
 });
 
 // Inisialisasi carousel
